@@ -1,0 +1,22 @@
+.container {
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    padding: 3px;
+    width: 50px;
+}
+
+.button {
+    background-color: rgba(235, 210, 176, 0.562);
+    border-width: 1px;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: rgb(235, 209, 176);
+}

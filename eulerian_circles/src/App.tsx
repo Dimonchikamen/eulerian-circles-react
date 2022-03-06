@@ -1,14 +1,13 @@
-import React from "react";
 import "./App.css";
-import EulerCircles from "./Components/EulerCircles";
-import PageHeader from "./Components/PageHeader";
+import EulerCircles from "./components/EulerCircles";
+import PageHeader from "./components/PageHeader/PageHeader";
 import { css } from "@emotion/css";
 
 function App() {
   return (
     <>
+      <PageHeader />
       <div className={styles.wrapper}>
-        <PageHeader />
         <EulerCircles />
       </div>
     </>
