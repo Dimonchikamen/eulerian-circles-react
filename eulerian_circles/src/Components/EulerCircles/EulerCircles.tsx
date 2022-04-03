@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { css } from "@emotion/css";
-import { Drawer } from "../Helpers/Drawer";
-import { Point } from "../Types/Point";
+import { Drawer } from "../../Helpers/Drawer";
+import { Point } from "../../Types/Point";
 
 const EulerCircles = () => {
   //const [count, setCount] = useState(4);
