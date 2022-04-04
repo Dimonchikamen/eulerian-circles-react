@@ -1,5 +1,6 @@
 import { Operation } from "../Shared/Orepations";
 import { Combine } from "../Types/Combine";
+import { TruthTable } from "../Types/TruthTable";
 
 export class Interpretator {
     private static unaryOperations = new Map([
@@ -15,26 +16,72 @@ export class Interpretator {
     ]);
 
     static getTruthTable(exp: string) {
+        if (!this.isValidate(exp)) {
+            throw Error("Выражение составлено неверно");
+        }
         const [variables, polishString] = this.convertToPolishNotation(exp);
         const combines = this.getVariablesCombines(variables);
         const results: boolean[] = [];
         for (let combine of combines) {
             results.push(this.calculate(polishString, combine)!);
         }
-        return this.createTable(variables, combines, results);
+        return new TruthTable(variables, combines, results);
     }
 
-    private static createTable(variables: string[], combines: Combine[], results: boolean[]) {
-        const result = [];
-        result.push([...variables, "result"]);
-        for(let i = 0; i < results.length; i++) {
-            const combine = [];
-            for(let field in combines[i]) {
-                combine.push(Number(combines[i][field]));
+    private static isValidate(expression: string) {
+        const stack = [];
+        const variables = [];
+        for (let i = 0; i < expression.length; i++) {
+            const symbol = expression[i];
+            const previousSymbol = i === 0 ? null : expression[i - 1];
+            const nextSymbol = i === expression.length - 1 ? null : expression[i + 1];
+
+            if (this.isOperation(symbol) && !this.operationIsValid(previousSymbol, nextSymbol)) {
+                console.log("INVALID UNAR ORERATION");
+                return false;
             }
-            result.push([...combine, Number(results[i])]);
+
+            if (this.isUnarOperation(symbol) && !this.unarOperationIsValid(previousSymbol, nextSymbol)) {
+                console.log("OPERATION");
+                return false;
+            }
+
+            if (symbol === "(") {
+                stack.push(symbol);
+            }
+
+            if (symbol === ")") {
+                console.log("INVALID )");
+                const top = stack.pop();
+                if (!top) {
+                    return false;
+                }
+            }
+
+            if (this.isVariable(symbol) && !this.variableIsValid(previousSymbol, nextSymbol)) {
+                return false;
+            }
         }
-        return result;
+        if (variables.length === 0 || stack.length !== 0) return false;
+        return true;
+    }
+
+    private static variableIsValid(previousSymbol: string|null, nextSymbol: string|null) {
+        const previousSymbolIsValid = previousSymbol ? !this.isVariable(previousSymbol) : true;
+        const nextSymbolIsValid = nextSymbol ? !this.isVariable(nextSymbol) : true;
+        return previousSymbolIsValid && nextSymbolIsValid;
+    }
+
+    private static operationIsValid(previousSymbol: string|null, nextSymbol: string|null) {
+        const previousSymbolIsValid = previousSymbol ? this.isVariable(previousSymbol) || previousSymbol === ")" : false;
+        const nextSymbolIsValid = nextSymbol ? this.isVariable(nextSymbol) || nextSymbol === "(" : false;
+        return previousSymbolIsValid && nextSymbolIsValid;
+    }
+
+    private static unarOperationIsValid(previousSymbol: string|null, nextSymbol: string|null) {
+        const previousSymbolIsValid = previousSymbol ? this.isOperation(previousSymbol) || previousSymbol === "(" : true; 
+        const nextSymbolIsValid = nextSymbol ? this.isVariable(nextSymbol) || nextSymbol === "(" : false;
+        return previousSymbolIsValid && nextSymbolIsValid;
     }
 
     private static calculate(polishString: string, combine: Combine) {
@@ -68,6 +115,7 @@ export class Interpretator {
         const variables: string[] = [];
         for (let i = 0; i < input.length; i++) {
             let currSymbol = input[i];
+
             if (this.isVariable(currSymbol)) {
                 result.push(currSymbol);
                 if (!variables.includes(currSymbol)) {
@@ -87,10 +135,15 @@ export class Interpretator {
             if (currSymbol === ")") {
                 while (true) {
                     let nexChar = stack.pop();
+
+                    if (!nexChar) {
+                        throw Error("Неверное выражение");
+                    }
+
                     if (nexChar === "(") {
                         break;
                     }
-                    result.push(nexChar!);
+                    result.push(nexChar);
                 }
             }
 
@@ -156,7 +209,8 @@ export class Interpretator {
         return result;
     }
 
-    private static isVariable(symbol: string) {
+    private static isVariable(symbol: string|null) {
+        if (!symbol) return false;
         const str = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz";
         for (let i = 0; i < str.length; i++) {
             if (str[i] === symbol) {

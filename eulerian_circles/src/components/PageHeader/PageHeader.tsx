@@ -1,24 +1,37 @@
-import { useState, createRef } from "react";
+import { createRef, useState } from "react";
 import { Operation } from "../../Shared/Orepations";
-import { Interpretator } from "../../Helpers/ExpressionInterpretator";
 import styles from "./PageHeader.module.css";
 import SymbolButton from "../../UiKit/SymbolButton/SymbolButton";
+import { Button } from "react-bootstrap";
+import { TruthTable } from "../../Types/TruthTable";
+import { Interpretator } from "../../Helpers/Interpretator";
 
 interface IPageHeader {
-  inputValue: string;
-  onChange: (newValue: string) => void;
+  onSubmit: (table: TruthTable) => void;
 }
 
 const PageHeader = (props: IPageHeader) => {
+  const [inputValue, setValue] = useState("");
+ // const [isValidate, setValidate] = useState(false);
   const input = createRef<HTMLInputElement>();
 
   const handleClick = (symbol: string) => {
-    props.onChange(props.inputValue + symbol);
+    setValue(prevValue => prevValue + symbol);
     input.current!.focus();
   }
 
+  const handleSubmit = () => {
+    try {
+      const truthTable = Interpretator.getTruthTable(inputValue);
+      props.onSubmit(truthTable);
+    }
+    catch (e: any) {
+      alert(e.message);
+    }
+  }
+
   const clear = () => {
-    props.onChange("");
+    setValue("");
     input.current!.focus();
   }
 
@@ -36,7 +49,10 @@ const PageHeader = (props: IPageHeader) => {
         <SymbolButton onClick={clear} title="clear" />
       </div>
       <div className={styles.inputContainer}>
-        <input id="input" className={styles.input} ref={input} value={props.inputValue} onChange={e => props.onChange(e.target.value)} autoFocus/>
+        <input id="input" className={styles.input} ref={input} value={inputValue} onChange={e => setValue(e.target.value)} autoFocus/>
+      </div>
+      <div className={styles.enterButtonContainer}>
+        <Button onClick={handleSubmit}>Завершить</Button>
       </div>
     </>
   );

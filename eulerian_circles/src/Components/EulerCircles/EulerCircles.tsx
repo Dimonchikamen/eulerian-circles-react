@@ -1,9 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { css } from "@emotion/css";
 import { Drawer } from "../../Helpers/Drawer";
 import { Point } from "../../Types/Point";
+import { TruthTable } from "../../Types/TruthTable";
 
-const EulerCircles = () => {
+interface IEulerCircles {
+  table: TruthTable;
+}
+
+const EulerCircles = (props: IEulerCircles) => {
+  const table = props.table;
   //const [count, setCount] = useState(4);
 
   const p1: Point = { x: 220, y: 220 };
@@ -14,8 +20,10 @@ const EulerCircles = () => {
   const points = [p1, p2, p3, p4];
 
   useEffect(() => {
-    resize();
-  }, []);
+    if (table.variables.length !== 0) {
+      resize();
+    }
+  }, [table.variables.length]);
 
   function resize() {
     const canvas: HTMLCanvasElement = document.getElementById(
