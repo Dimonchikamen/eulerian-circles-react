@@ -37,9 +37,4 @@ _chai.expect;
         expect(expectedTable).eql(actualTable, "actual TruthTable is not equal to expected");
 
     }
-
-    private a() {
-        
-    }
-
 }
