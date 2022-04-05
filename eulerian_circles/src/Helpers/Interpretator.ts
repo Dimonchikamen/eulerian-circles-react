@@ -19,7 +19,8 @@ export class Interpretator {
         if (!this.isValidate(exp)) {
             throw Error("Выражение составлено неверно");
         }
-        const [variables, polishString] = this.convertToPolishNotation(exp);
+        const variables = this.getVariables(exp)
+        const polishString =  this.convertToPolishNotation(exp);
         const combines = this.getVariablesCombines(variables);
         const results: boolean[] = [];
         for (let combine of combines) {
@@ -28,9 +29,72 @@ export class Interpretator {
         return new TruthTable(variables, combines, results);
     }
 
+    static convertToPolishNotation(exp: string) {
+        const input = exp.concat().toLocaleLowerCase();
+        const stack = [];
+        const result: string[] = [];
+        for (let i = 0; i < input.length; i++) {
+            let currSymbol = input[i];
+
+            if (this.isVariable(currSymbol)) {
+                result.push(currSymbol);
+                continue;
+            }
+
+            if (this.isUnarOperation(currSymbol)) {
+                stack.push(currSymbol);
+            }
+
+            if (currSymbol === "(") {
+                stack.push(currSymbol);
+            }
+
+            if (currSymbol === ")") {
+                while (true) {
+                    let nexChar = stack.pop();
+
+                    if (!nexChar) {
+                        throw Error("Неверное выражение");
+                    }
+
+                    if (nexChar === "(") {
+                        break;
+                    }
+                    result.push(nexChar);
+                }
+            }
+
+            if (this.isOperation(currSymbol)) {
+                while (stack.length > 0) {
+                    let top = stack[stack.length - 1];
+                    if (!(this.isUnarOperation(top) || this.isPriorityThen(top, currSymbol))) break;
+
+                    result.push(top);
+                    stack.pop();
+                }
+                stack.push(currSymbol);
+            }
+        }
+
+        while (stack.length > 0) {
+            result.push(stack.pop()!);
+        }
+
+        return result.join("");
+    }
+
+    static getVariables(exp: string) {
+        const result: string[] = []
+        for(let symbol of exp) {
+            if (this.isVariable(symbol) && !result.includes(symbol)) {
+                result.push(symbol);
+            }
+        }
+        return result;
+    }
+
     private static isValidate(expression: string) {
         const stack = [];
-        const variables = [];
         for (let i = 0; i < expression.length; i++) {
             const symbol = expression[i];
             const previousSymbol = i === 0 ? null : expression[i - 1];
@@ -59,10 +123,13 @@ export class Interpretator {
             }
 
             if (this.isVariable(symbol) && !this.variableIsValid(previousSymbol, nextSymbol)) {
+                console.log("INVALID VARIABLE");
                 return false;
             }
         }
-        if (variables.length === 0 || stack.length !== 0) return false;
+        if (stack.length !== 0) {
+            return false;
+        }
         return true;
     }
 
@@ -106,64 +173,6 @@ export class Interpretator {
             }
         }
         return stack.pop();
-    }
-
-    private static convertToPolishNotation(exp: string): [variables: string[], polishString: string] {
-        const input = exp.concat().toLocaleLowerCase();
-        const stack = [];
-        const result: string[] = [];
-        const variables: string[] = [];
-        for (let i = 0; i < input.length; i++) {
-            let currSymbol = input[i];
-
-            if (this.isVariable(currSymbol)) {
-                result.push(currSymbol);
-                if (!variables.includes(currSymbol)) {
-                    variables.push(currSymbol);
-                }
-                continue;
-            }
-
-            if (this.isUnarOperation(currSymbol)) {
-                stack.push(currSymbol);
-            }
-
-            if (currSymbol === "(") {
-                stack.push(currSymbol);
-            }
-
-            if (currSymbol === ")") {
-                while (true) {
-                    let nexChar = stack.pop();
-
-                    if (!nexChar) {
-                        throw Error("Неверное выражение");
-                    }
-
-                    if (nexChar === "(") {
-                        break;
-                    }
-                    result.push(nexChar);
-                }
-            }
-
-            if (this.isOperation(currSymbol)) {
-                while (stack.length > 0) {
-                    let top = stack[stack.length - 1];
-                    if (!(this.isUnarOperation(top) || this.isPriorityThen(top, currSymbol))) break;
-
-                    result.push(top);
-                    stack.pop();
-                }
-                stack.push(currSymbol);
-            }
-        }
-
-        while (stack.length > 0) {
-            result.push(stack.pop()!);
-        }
-
-        return [variables, result.join("")];
     }
 
     private static getVariablesCombines(variables: string[]): Combine[] {

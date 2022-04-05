@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "tests/tsconfig.json",
+    "tests/Interpretator.ts"
   ]
 }
