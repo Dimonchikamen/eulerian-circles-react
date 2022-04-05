@@ -1,5 +1,5 @@
 import { Interpretator } from "../src/Helpers/Interpretator";
-import { params, suite, test } from "@testdeck/mocha";
+import { params, suite } from "@testdeck/mocha";
 import * as _chai from "chai";
 import { expect } from "chai";
 import { TruthTable } from "../src/Types/TruthTable";
@@ -7,16 +7,31 @@ import { TruthTable } from "../src/Types/TruthTable";
 _chai.should();
 _chai.expect;
 
+type ConvertToPolishNotationIsCorrectlyParameters = {
+    expression: string;
+    expected: string;
+}
+
+type GetVariablesIsCorrectpyParameters = {
+    expression: string;
+    expected: string[];
+}
+
+type GetTruthTableIsCorretrlyParametes = {
+    expression: string;
+    expectedTable: TruthTable;
+}
+
 @suite class InterpreterModuleTest {
 
-    @params({exp: "a∨b", expected: "ab∨" }, "simple expression")
-    convertToPolishNotationIsCorrectly({exp, expected}) {        
-        expect(expected).equal(Interpretator.convertToPolishNotation(exp));
+    @params({expression: "a∨b", expected: "ab∨" } as ConvertToPolishNotationIsCorrectlyParameters, "simple expression")
+    convertToPolishNotationIsCorrectly({expression, expected}: ConvertToPolishNotationIsCorrectlyParameters) {        
+        expect(expected).equal(Interpretator.convertToPolishNotation(expression));
     }
 
-    @params({expression: "a∨a", expected: ["a"]}, "expression have 2 same variables")
-    @params({expression: "a∨b", expected: ["a", "b"]}, "simbple expression")
-    getVariablesIsCorrectly({expression, expected}) {
+    @params({expression: "a∨a", expected: ["a"]} as GetVariablesIsCorrectpyParameters, "expression have 2 same variables")
+    @params({expression: "a∨b", expected: ["a", "b"]} as GetVariablesIsCorrectpyParameters, "simbple expression")
+    getVariablesIsCorrectly({expression, expected}: GetVariablesIsCorrectpyParameters) {
         expect(expected).eql(Interpretator.getVariables(expression));
     }
 
@@ -31,8 +46,8 @@ _chai.expect;
                 {a: true, b: true}
             ],
             [false, true, true, true]
-            )})
-    getTrurhTableIsCorrectly({expression, expectedTable}: {expression: string, expectedTable: TruthTable}) {
+            )} as GetTruthTableIsCorretrlyParametes)
+    getTruthTableIsCorrectly({expression, expectedTable}: GetTruthTableIsCorretrlyParametes) {
         const actualTable = Interpretator.getTruthTable(expression);
         expect(expectedTable).eql(actualTable, "actual TruthTable is not equal to expected");
 
