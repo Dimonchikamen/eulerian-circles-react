@@ -22,7 +22,7 @@ const PageHeader = (props: IPageHeader) => {
 
   const handleSubmit = () => {
     try {
-      const truthTable = Interpretator.getTruthTable(inputValue);
+      const truthTable = Interpretator.getTruthTable(inputValue.toLowerCase());
       props.onSubmit(truthTable);
     }
     catch (e: any) {
