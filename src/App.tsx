@@ -8,12 +8,9 @@ import { TruthTable } from "./Types/TruthTable";
 
 function App() {
   const [table, setTable] = useState<TruthTable|null>(null);
-  const [variables, setVariables] = useState<string[]|null>(null);
 
   const handleSubmit = (truthTable: TruthTable) => {
     setTable(truthTable);
-    setVariables(truthTable.variables);
-    console.log(truthTable);
   }
 
   return (

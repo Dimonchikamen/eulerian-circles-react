@@ -1,5 +1,6 @@
 {
   "name": "eulerian_circles",
+  "homepage": "https://Dimonchikamen.github.io/Eulerian_Circles",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,6 +21,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "nmp run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "nyc ./node_modules/.bin/_mocha 'tests/**/*.test.ts'",
@@ -47,6 +50,7 @@
     "@testdeck/mocha": "^0.2.0",
     "@types/chai": "^4.3.0",
     "chai": "^4.3.6",
+    "gh-pages": "^3.2.3",
     "mocha": "^9.2.2",
     "nyc": "^15.1.0",
     "ts-node": "^10.7.0"

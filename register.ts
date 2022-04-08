@@ -1,5 +1,4 @@
-const tsNode = require("ts-node");
-const testNode = require("./tests/tsconfig.json");
+import tsNode from "ts-node";
 
 tsNode.register({
     files: true,
