@@ -1,6 +1,6 @@
 {
   "name": "eulerian_circles",
-  "homepage": "https://Dimonchikamen.github.io/Eulerian_Circles",
+  "homepage": "https://dimonchikamen.github.io/Eulerian_Circles",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,7 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "nmp run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
