@@ -1,23 +1,34 @@
 import { Point } from "../Types/Point";
+import { TruthTable } from "../Types/TruthTable";
 
 export class Drawer {
 
-    static draw(ctx: CanvasRenderingContext2D, points: Point[], lineWidth = 1, radius = 200) {
-
-        points.forEach(point => {
-            this.drawCircle(ctx, lineWidth, point, radius);
+    static draw(ctx: CanvasRenderingContext2D, table: TruthTable, width: number, height: number, lineWidth = 1, radius = 200) {
+        const variables = table.variables;
+        const body = table.body;
+        const circles = this.getCircles(variables, width, height, radius);
+        circles.forEach(circle => {
+            this.drawCircle(ctx, lineWidth, circle.center, radius);
         });
 
-        for (let i = 0; i < 1800; i += 2) {
-            for (let j = 0; j < 900; j += 2) {
+        for (let i = 0; i < width; i += 2) {
+            for (let j = 0; j < height; j += 2) {
                 let curPoint: Point = { x: i, y: j };
-                if (this.getDistance(curPoint, points[0]) <= radius - lineWidth &&
-                    this.getDistance(curPoint, points[1]) <= radius - lineWidth ||
-                    this.getDistance(curPoint, points[2]) <= radius - lineWidth) {
-                    ctx.lineWidth = lineWidth;
-                    ctx.fillStyle = "blue";
-                    ctx.fillRect(i, j, 1, 1);
-                }
+                body.forEach(row => {
+                    const expressionIsTrue = row[row.length - 1];
+                    if (expressionIsTrue) {
+                        let subResult = true;
+                        for (let k = 0; k < row.length - 1; k++) {
+                            const circle = circles[k];
+                            subResult = subResult && this.getDistance(circle.center, curPoint) < radius === Boolean(row[k]);
+                        }
+                        if (subResult) {
+                            ctx.lineWidth = lineWidth;
+                            ctx.fillStyle = "blue";
+                            ctx.fillRect(i, j, 1, 1);
+                        }
+                    }
+                });
             }
         }
 
@@ -38,4 +49,39 @@ export class Drawer {
         return Math.sqrt(dx * dx + dy * dy);
     }
 
+    private static getCircles(variables: string[], width: number, height: number, circleRadius: number) {
+        const result = [];
+        const centres = this.getCentres(variables.length, width, height, circleRadius);
+        for (let i = 0; i < centres.length; i++) {
+            result.push({ name: variables[i], center: centres[i] })
+        }
+        return result
+    }
+
+    private static getCentres(pointsCount: number, width: number, height: number, circleRadius: number) {
+        const result: Point[] = [];
+        const center: Point = { x: width / 2, y: height / 2 };
+        if (pointsCount === 1) {
+            result.push({ x: center.x, y: center.y });
+        } else if (pointsCount === 2) {
+            result.push(...[
+                { x: center.x - circleRadius / 2, y: center.y },
+                { x: center.x + circleRadius / 2, y: center.y }
+            ]);
+        } else if (pointsCount === 3) {
+            result.push(...[
+                { x: center.x - circleRadius / 2, y: center.y - circleRadius / 2 },
+                { x: center.x + circleRadius / 2, y: center.y - circleRadius / 2 },
+                { x: center.x, y: center.y + circleRadius / 2 }
+            ]);
+        } else if (pointsCount === 4) {
+            result.push(...[
+                { x: center.x - circleRadius / 2, y: center.y - circleRadius / 2 },
+                { x: center.x + circleRadius / 2, y: center.y - circleRadius / 2 },
+                { x: center.x - circleRadius / 2, y: center.y + circleRadius / 2 },
+                { x: center.x + circleRadius / 2, y: center.y + circleRadius / 2 },
+            ]);
+        }
+        return result;
+    }
 }

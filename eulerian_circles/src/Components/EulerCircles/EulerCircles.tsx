@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { css } from "@emotion/css";
 import { Drawer } from "../../Helpers/Drawer";
-import { Point } from "../../Types/Point";
 import { TruthTable } from "../../Types/TruthTable";
 
 interface IEulerCircles {
@@ -12,18 +11,11 @@ const EulerCircles = (props: IEulerCircles) => {
   const table = props.table;
   //const [count, setCount] = useState(4);
 
-  const p1: Point = { x: 220, y: 220 };
-  const p2: Point = { x: 440, y: 220 };
-  const p3: Point = { x: 220, y: 440 };
-  const p4: Point = { x: 440, y: 440 };
-
-  const points = [p1, p2, p3, p4];
-
   useEffect(() => {
     if (table.variables.length !== 0) {
       resize();
     }
-  }, [table.variables.length]);
+  });
 
   function resize() {
     const canvas: HTMLCanvasElement = document.getElementById(
@@ -38,7 +30,7 @@ const EulerCircles = (props: IEulerCircles) => {
       //   canvas.width = window.innerWidth * 0.9;
       canvas.width = 650;
       canvas.height = window.innerHeight * 0.7;
-      Drawer.draw(ctx!, points, 3);
+      Drawer.draw(ctx!, table, canvas.width, canvas.height, 3);
     }
     resizeCanvas();
   }

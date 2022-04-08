@@ -50,6 +50,5 @@ type GetTruthTableIsCorretrlyParametes = {
     getTruthTableIsCorrectly({expression, expectedTable}: GetTruthTableIsCorretrlyParametes) {
         const actualTable = Interpretator.getTruthTable(expression);
         expect(expectedTable).eql(actualTable, "actual TruthTable is not equal to expected");
-
     }
 }
