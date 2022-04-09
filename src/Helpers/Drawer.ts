@@ -22,7 +22,7 @@ export class Drawer {
                         let subResult = true;
                         for (let k = 0; k < row.length - 1; k++) {
                             const circle = circles[k];
-                            subResult = subResult && this.getDistance(circle.center, curPoint) < radius === Boolean(row[k]);
+                            subResult = subResult && ((this.getDistance(circle.center, curPoint) < radius) === Boolean(row[k]));
                         }
                         if (subResult) {
                             ctx.lineWidth = lineWidth;
