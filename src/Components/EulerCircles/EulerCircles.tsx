@@ -28,7 +28,7 @@ const EulerCircles = (props: IEulerCircles) => {
 
     function resizeCanvas() {
       //   canvas.width = window.innerWidth * 0.9;
-      canvas.width = 1000;
+      canvas.width = window.innerWidth * 0.7;
       canvas.height = window.innerHeight * 0.8;
       Drawer.draw(ctx!, table, canvas.width, canvas.height, 3);
     }
