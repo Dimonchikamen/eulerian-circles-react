@@ -94,6 +94,7 @@ export class Interpretator {
     }
 
     private static isValidate(expression: string) {
+        if (expression.length === 0) return false;
         const stack = [];
         for (let i = 0; i < expression.length; i++) {
             const symbol = expression[i];
@@ -101,12 +102,10 @@ export class Interpretator {
             const nextSymbol = i === expression.length - 1 ? null : expression[i + 1];
 
             if (this.isOperation(symbol) && !this.operationIsValid(previousSymbol, nextSymbol)) {
-                console.log("INVALID UNAR ORERATION");
                 return false;
             }
 
             if (this.isUnarOperation(symbol) && !this.unarOperationIsValid(previousSymbol, nextSymbol)) {
-                console.log("OPERATION");
                 return false;
             }
 
@@ -115,7 +114,6 @@ export class Interpretator {
             }
 
             if (symbol === ")") {
-                console.log("INVALID )");
                 const top = stack.pop();
                 if (!top) {
                     return false;
@@ -123,7 +121,6 @@ export class Interpretator {
             }
 
             if (this.isVariable(symbol) && !this.variableIsValid(previousSymbol, nextSymbol)) {
-                console.log("INVALID VARIABLE");
                 return false;
             }
         }
@@ -141,12 +138,12 @@ export class Interpretator {
 
     private static operationIsValid(previousSymbol: string|null, nextSymbol: string|null) {
         const previousSymbolIsValid = previousSymbol ? this.isVariable(previousSymbol) || previousSymbol === ")" : false;
-        const nextSymbolIsValid = nextSymbol ? this.isVariable(nextSymbol) || nextSymbol === "(" : false;
+        const nextSymbolIsValid = nextSymbol ? this.isVariable(nextSymbol) || this.isUnarOperation(nextSymbol) || nextSymbol === "(" : false;
         return previousSymbolIsValid && nextSymbolIsValid;
     }
 
     private static unarOperationIsValid(previousSymbol: string|null, nextSymbol: string|null) {
-        const previousSymbolIsValid = previousSymbol ? this.isOperation(previousSymbol) || previousSymbol === "(" : true; 
+        const previousSymbolIsValid = previousSymbol ? this.isOperation(previousSymbol) || this.isOperation(previousSymbol) || previousSymbol === "(" : true; 
         const nextSymbolIsValid = nextSymbol ? this.isVariable(nextSymbol) || nextSymbol === "(" : false;
         return previousSymbolIsValid && nextSymbolIsValid;
     }

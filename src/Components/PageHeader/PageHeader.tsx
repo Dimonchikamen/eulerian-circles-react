@@ -38,6 +38,9 @@ const PageHeader = (props: IPageHeader) => {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === "Enter") {
+      handleSubmit();
+    }
     // if (e.key === "ArrowRight") {
     //   setCaretPosition(input.current!.selectionStart!);
     // } else if (e.key === "ArrowLeft") {
