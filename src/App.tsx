@@ -1,4 +1,3 @@
-import "./App.css";
 import EulerCircles from "./Components/EulerCircles/EulerCircles";
 import PageHeader from "./Components/PageHeader/PageHeader";
 import { css } from "@emotion/css";
@@ -17,7 +16,7 @@ function App() {
     <>
       <div className={styles.wrapper}>
         <PageHeader onSubmit={handleSubmit} />
-        {table && <EulerCircles table={table} />}
+        {table && table.variables.length > 0 && table.variables.length <= 4 &&  <EulerCircles table={table} />}
         {table && <TableConstructor headers={table.headers} data={table.body} />}
       </div>
     </>

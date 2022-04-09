@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import React, { createRef, useState } from "react";
 import { Operation } from "../../Shared/Orepations";
 import styles from "./PageHeader.module.css";
 import SymbolButton from "../../UiKit/SymbolButton/SymbolButton";
@@ -12,11 +12,18 @@ interface IPageHeader {
 
 const PageHeader = (props: IPageHeader) => {
   const [inputValue, setValue] = useState("");
- // const [isValidate, setValidate] = useState(false);
+ // const [caretPositionIndex, setCaretPosition] = useState<number>(0);
   const input = createRef<HTMLInputElement>();
 
   const handleClick = (symbol: string) => {
-    setValue(prevValue => prevValue + symbol);
+   // console.log(caretPositionIndex);
+    setValue(prevValue => prevValue + symbol); //{
+     // const left = prevValue.slice(0, caretPositionIndex!);
+     // const right = prevValue.slice(caretPositionIndex!);
+     // setCaretPosition(input.current!.selectionStart!);
+     // return left + symbol + right;
+   // });
+    //setCaretPosition(input.current!.selectionStart!);
     input.current!.focus();
   }
 
@@ -30,13 +37,32 @@ const PageHeader = (props: IPageHeader) => {
     }
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // if (e.key === "ArrowRight") {
+    //   setCaretPosition(input.current!.selectionStart!);
+    // } else if (e.key === "ArrowLeft") {
+    //   setCaretPosition(input.current!.selectionEnd!);
+    // } else if (e.code === "enter") {
+    //   handleSubmit();
+    // } 
+    // if (e.code === "backspace") {
+    //   setCaretPosition(input.current!.selectionEnd!);
+    // } else if (caretPositionIndex !== inputValue.length + 1) {
+    //   setCaretPosition(input.current!.selectionStart!);
+    // }
+  }
+
+  const handleInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    // console.log(e);
+  }
+
   const clear = () => {
     setValue("");
     input.current!.focus();
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.header}>
         <SymbolButton onClick={handleClick} title={Operation.NOT} />
         <SymbolButton onClick={handleClick} title={Operation.OR} />
@@ -49,12 +75,12 @@ const PageHeader = (props: IPageHeader) => {
         <SymbolButton onClick={clear} title="clear" />
       </div>
       <div className={styles.inputContainer}>
-        <input id="input" className={styles.input} ref={input} value={inputValue} onChange={e => setValue(e.target.value)} autoFocus/>
+        <input id="input" className={styles.input} ref={input} value={inputValue} onClick={handleInputClick} onKeyDown={handleKeyDown} onChange={e => setValue(e.target.value)} autoFocus/>
       </div>
       <div className={styles.enterButtonContainer}>
         <Button onClick={handleSubmit}>Завершить</Button>
       </div>
-    </>
+    </div>
   );
 };
 

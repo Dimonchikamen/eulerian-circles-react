@@ -2,6 +2,7 @@ import { Point } from "../Types/Point";
 import { TruthTable } from "../Types/TruthTable";
 
 export class Drawer {
+    private static fontSize = 40;
 
     static draw(ctx: CanvasRenderingContext2D, table: TruthTable, width: number, height: number, lineWidth = 1, radius = 200) {
         const variables = table.variables;
@@ -9,6 +10,7 @@ export class Drawer {
         const circles = this.getCircles(variables, width, height, radius);
         circles.forEach(circle => {
             this.drawCircle(ctx, lineWidth, circle.center, radius);
+            this.drawText(ctx, circle.name, circle.namePosition);
         });
 
         for (let i = 0; i < width; i += 2) {
@@ -31,7 +33,6 @@ export class Drawer {
                 });
             }
         }
-
         ctx.stroke();
     }
 
@@ -41,6 +42,16 @@ export class Drawer {
         ctx.arc(center.x, center.y, radius, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.stroke();
+    }
+
+    private static drawText(ctx: CanvasRenderingContext2D, text: string, position: Point) {
+        const oldColor = ctx.fillStyle;
+        const oldFont = ctx.font;
+        ctx.fillStyle = "black";
+        ctx.font = `${this.fontSize}px serif`;
+        ctx.fillText(text, position.x, position.y);
+        ctx.fillStyle = oldColor;
+        ctx.font = oldFont;
     }
 
     private static getDistance(point1: Point, point2: Point) {
@@ -53,9 +64,32 @@ export class Drawer {
         const result = [];
         const centres = this.getCentres(variables.length, width, height, circleRadius);
         for (let i = 0; i < centres.length; i++) {
-            result.push({ name: variables[i], center: centres[i] })
+            const namePosition = this.getNamePosition(centres[i], circleRadius, width, height);
+            result.push({ name: variables[i], center: centres[i], namePosition: namePosition })
         }
         return result
+    }
+
+    private static getNamePosition(circleCenter: Point, radius: number, canvasWidth: number, canvasHeight: number) {
+        const center: Point = { x: canvasWidth / 2, y: canvasHeight / 2 };
+        const positionOffset = 1.15 * radius;
+        const nonCetrePositionOffset = 0.7 * positionOffset;
+        const fontOffset = this.fontSize / 2;
+        if (circleCenter.x === center.x) {
+            return { x: circleCenter.x, y: circleCenter.y + positionOffset } as Point
+        } else if (circleCenter.x < center.x) {
+            return circleCenter.y === center.y 
+            ? { x: circleCenter.x - positionOffset, y: circleCenter.y } as Point
+            : circleCenter.y < center.y 
+                ? { x: circleCenter.x - nonCetrePositionOffset, y: circleCenter.y - nonCetrePositionOffset } as Point
+                : { x: circleCenter.x - nonCetrePositionOffset, y: circleCenter.y + nonCetrePositionOffset + fontOffset } as Point
+        } else {
+            return circleCenter.y === center.y 
+            ? { x: circleCenter.x + positionOffset - fontOffset, y: circleCenter.y } as Point
+            : circleCenter.y < center.y 
+                ? { x: circleCenter.x + nonCetrePositionOffset - fontOffset, y: circleCenter.y - nonCetrePositionOffset } as Point
+                : { x: circleCenter.x + nonCetrePositionOffset - fontOffset, y: circleCenter.y + nonCetrePositionOffset + fontOffset } as Point
+        }
     }
 
     private static getCentres(pointsCount: number, width: number, height: number, circleRadius: number) {
