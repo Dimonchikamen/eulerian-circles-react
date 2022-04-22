@@ -42,11 +42,11 @@ const EulerCircles = (props: IEulerCircles) => {
         Drawer.draw(ctx!, table, canvas.width, canvas.height, 3, 140);
       } else if (window.innerWidth >= 400) {
         canvas.width = window.innerWidth * 0.8;
-        canvas.height = window.innerHeight * 0.5;
+        canvas.height = window.outerHeight * 0.5;
         Drawer.draw(ctx!, table, canvas.width, canvas.height, 3, 100);
       } else {
         canvas.width = window.innerWidth * 0.82;
-        canvas.height = window.innerHeight * 0.4;
+        canvas.height = window.outerHeight * 0.45;
         Drawer.draw(ctx!, table, canvas.width, canvas.height, 3, 80);
       }
       //   Drawer.draw(ctx!, table, canvas.width, canvas.height, 3);
