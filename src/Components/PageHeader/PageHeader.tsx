@@ -88,6 +88,7 @@ const PageHeader = (props: IPageHeader) => {
           onKeyDown={handleKeyDown}
           onChange={(e) => setValue(e.target.value)}
           autoFocus
+          placeholder="A v B"
         />
         <div className={styles.enterButtonContainer}>
           <button className={styles.enterButton} onClick={handleSubmit}>

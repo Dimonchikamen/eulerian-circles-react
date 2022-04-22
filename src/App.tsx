@@ -30,12 +30,10 @@ function App() {
             <TableConstructor headers={table.headers} data={table.body} />
           )}
           {!table && (
-            <>
-              <div className={styles.infoHelp}>
-                Введите что-нибудь, чтобы получить круги Эйлера (до 4-х
-                переменных) и таблицу истинности
-              </div>
-            </>
+            <div className={styles.infoHelp}>
+              Введите что-нибудь, чтобы получить круги Эйлера (до 4-х
+              переменных) и таблицу истинности
+            </div>
           )}
         </div>
       </div>
@@ -60,7 +58,7 @@ const styles = {
     font-size: 18px;
     text-transform: uppercase;
     color: rgb(91, 91, 91);
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: inline-block;
   `,
 };
