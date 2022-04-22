@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Eulerian_Circles/static/css/main.f39970c3.css",
-    "main.js": "/Eulerian_Circles/static/js/main.22cee3fb.js",
+    "main.css": "/Eulerian_Circles/static/css/main.c3f9ea42.css",
+    "main.js": "/Eulerian_Circles/static/js/main.458af97f.js",
     "static/js/787.681333b9.chunk.js": "/Eulerian_Circles/static/js/787.681333b9.chunk.js",
     "index.html": "/Eulerian_Circles/index.html",
-    "main.f39970c3.css.map": "/Eulerian_Circles/static/css/main.f39970c3.css.map",
-    "main.22cee3fb.js.map": "/Eulerian_Circles/static/js/main.22cee3fb.js.map",
+    "main.c3f9ea42.css.map": "/Eulerian_Circles/static/css/main.c3f9ea42.css.map",
+    "main.458af97f.js.map": "/Eulerian_Circles/static/js/main.458af97f.js.map",
     "787.681333b9.chunk.js.map": "/Eulerian_Circles/static/js/787.681333b9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f39970c3.css",
-    "static/js/main.22cee3fb.js"
+    "static/css/main.c3f9ea42.css",
+    "static/js/main.458af97f.js"
   ]
 }
