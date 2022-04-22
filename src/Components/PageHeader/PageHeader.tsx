@@ -88,12 +88,15 @@ const PageHeader = (props: IPageHeader) => {
           onChange={(e) => setValue(e.target.value)}
           autoFocus
           placeholder="A v B"
+          style={{ paddingRight: "44px" }}
         />
-        <div className="" style={{ marginLeft: "-44px" }}>
-          <button className={styles.clearButton} onClick={clear}>
-            &#10006;
-          </button>
-        </div>
+        <button
+          className={styles.clearButton}
+          onClick={clear}
+          style={{ marginLeft: "-44px" }}
+        >
+          &#10006;
+        </button>
         <div className={styles.enterButtonContainer}>
           <button className={styles.enterButton} onClick={handleSubmit}>
             НАЧАТЬ

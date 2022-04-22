@@ -72,7 +72,7 @@
 .clearButton {
   background-color: transparent;
   border: none;
-  color: grey;
+  color: grey !important;
 }
 
 @media only screen and (max-width: 1000px) {
