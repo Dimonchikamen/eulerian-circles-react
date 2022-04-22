@@ -5,6 +5,9 @@ import SymbolButton from "../../UiKit/SymbolButton/SymbolButton";
 // import { Button } from "react-bootstrap";
 import { TruthTable } from "../../Types/TruthTable";
 import { Interpretator } from "../../Helpers/Interpretator";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
 
 interface IPageHeader {
   onSubmit: (table: TruthTable) => void;
@@ -78,25 +81,41 @@ const PageHeader = (props: IPageHeader) => {
         <SymbolButton onClick={handleClick} title=")" />
       </div>
       <div className={styles.inputContainer}>
-        <input
-          id="input"
-          className={styles.input}
-          ref={input}
-          value={inputValue}
-          onClick={handleInputClick}
-          onKeyDown={handleKeyDown}
-          onChange={(e) => setValue(e.target.value)}
-          autoFocus
-          placeholder="A v B"
-          style={{ paddingRight: "44px" }}
-        />
-        <button
-          className={styles.clearButton}
-          onClick={clear}
-          style={{ marginLeft: "-44px" }}
-        >
-          &#10006;
-        </button>
+        <div style={{ width: "100%" }}>
+          <input
+            id="input"
+            className={styles.input}
+            ref={input}
+            value={inputValue}
+            onClick={handleInputClick}
+            onKeyDown={handleKeyDown}
+            onChange={(e) => setValue(e.target.value)}
+            autoFocus
+            placeholder="A v B"
+            style={{ paddingRight: "44px" }}
+          />
+          <button
+            className={styles.clearButton}
+            onClick={clear}
+            style={{ marginLeft: "-44px" }}
+          >
+            &#10006;
+          </button>
+        </div>
+        {/* <InputGroup className="mb-3">
+          <FormControl
+            placeholder="Recipient's username"
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+          />
+          <Button
+            variant="outline-secondary"
+            className={styles.clearButton}
+            id="button-addon2"
+          >
+            &#10006;
+          </Button>
+        </InputGroup> */}
         <div className={styles.enterButtonContainer}>
           <button className={styles.enterButton} onClick={handleSubmit}>
             НАЧАТЬ
