@@ -1,9 +1,10 @@
 .container {
-    display: grid;
-    place-items: center;
-    margin-bottom: 20px;
+  display: grid;
+  place-items: center;
+  margin-block: 1rem 4rem;
+  /* color:rgb(91, 91, 91) */
 }
 
 .drawField {
-    border: 1px solid grey;
+  /* border: 1px solid grey; */
 }

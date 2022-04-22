@@ -24,12 +24,12 @@ const EulerCircles = (props: IEulerCircles) => {
     const ctx = canvas.getContext("2d");
 
     // resize the canvas to fill browser window dynamically
-   // window.addEventListener("resize", resizeCanvas, false);
+    // window.addEventListener("resize", resizeCanvas, false);
 
     function resizeCanvas() {
       //   canvas.width = window.innerWidth * 0.9;
-      canvas.width = window.innerWidth * 0.7;
-      canvas.height = window.innerHeight * 0.8;
+      canvas.width = window.innerWidth * 0.4;
+      canvas.height = window.innerHeight * 0.65;
       Drawer.draw(ctx!, table, canvas.width, canvas.height, 3);
     }
     resizeCanvas();

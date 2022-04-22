@@ -1,9 +1,13 @@
 .container {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.tableTitle {
+  margin-top: 1rem;
 }
 
 .cell {
-    text-align: center;
+  text-align: center;
 }

@@ -1,22 +1,24 @@
 .container {
-  border: 1px solid gray;
-  border-radius: 10px;
+  /* border: 1px solid gray; */
+  /* border-radius: 10px; */
   display: inline-block;
   min-height: 50px;
-  padding: 3px;
+  /* padding: 3px; */
   min-width: 50px;
 }
 
 .button {
-  background-color: rgba(199, 248, 167, 0.562);
-  border-width: 1px;
-  border-radius: 10px;
+  background-color: transparent;
+  border-radius: 7px;
   display: inline-block;
   height: 100%;
   width: 100%;
+  border: 1px solid grey;
   cursor: pointer;
+  font-size: 20px;
+  color: rgb(71, 71, 71);
 }
 
 .button:hover {
-  background-color: rgb(142, 218, 150);
+  background-color: rgba(199, 248, 167, 0.562);
 }
