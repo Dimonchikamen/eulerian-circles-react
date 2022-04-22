@@ -89,12 +89,11 @@ const PageHeader = (props: IPageHeader) => {
           autoFocus
           placeholder="A v B"
         />
-        <div className="" style={{ marginLeft: "-44px" }}></div>
-        {/* <div className={styles.header}> */}
-        <button className={styles.clearButton} onClick={clear}>
-          &#10006;
-        </button>
-        {/* </div> */}
+        <div className="" style={{ marginLeft: "-44px" }}>
+          <button className={styles.clearButton} onClick={clear}>
+            &#10006;
+          </button>
+        </div>
         <div className={styles.enterButtonContainer}>
           <button className={styles.enterButton} onClick={handleSubmit}>
             НАЧАТЬ

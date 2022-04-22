@@ -31,9 +31,11 @@ function App() {
           )}
           {!table && (
             <div className={styles.infoHelp}>
-              <span style={{ fontSize: "19px" }}>&#128712;</span> Введите
-              что-нибудь, чтобы получить круги Эйлера (до 4-х переменных) и
-              таблицу истинности
+              <span style={{ fontSize: "19px", textTransform: "none" }}>
+                &#x24D8;
+              </span>
+              &#xA0; Введите что-нибудь, чтобы получить круги Эйлера (до 4-х
+              переменных) и таблицу истинности
             </div>
           )}
         </div>
