@@ -76,7 +76,6 @@ const PageHeader = (props: IPageHeader) => {
         <SymbolButton onClick={handleClick} title={Operation.XOR} />
         <SymbolButton onClick={handleClick} title="(" />
         <SymbolButton onClick={handleClick} title=")" />
-        <SymbolButton onClick={clear} title="clear" />
       </div>
       <div className={styles.inputContainer}>
         <input
@@ -90,6 +89,12 @@ const PageHeader = (props: IPageHeader) => {
           autoFocus
           placeholder="A v B"
         />
+        <div className="" style={{ marginLeft: "-44px" }}></div>
+        {/* <div className={styles.header}> */}
+        <button className={styles.clearButton} onClick={clear}>
+          &#10006;
+        </button>
+        {/* </div> */}
         <div className={styles.enterButtonContainer}>
           <button className={styles.enterButton} onClick={handleSubmit}>
             НАЧАТЬ

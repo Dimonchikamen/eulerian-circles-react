@@ -31,8 +31,9 @@ function App() {
           )}
           {!table && (
             <div className={styles.infoHelp}>
-              Введите что-нибудь, чтобы получить круги Эйлера (до 4-х
-              переменных) и таблицу истинности
+              <span style={{ fontSize: "19px" }}>&#128712;</span> Введите
+              что-нибудь, чтобы получить круги Эйлера (до 4-х переменных) и
+              таблицу истинности
             </div>
           )}
         </div>
@@ -60,6 +61,9 @@ const styles = {
     color: rgb(91, 91, 91);
     margin-top: 1rem;
     display: inline-block;
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
   `,
 };
 export default App;

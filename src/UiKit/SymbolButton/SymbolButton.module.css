@@ -9,7 +9,7 @@
 
 .button {
   background-color: transparent;
-  border-radius: 7px;
+  border-radius: 5px;
   display: inline-block;
   height: 100%;
   width: 100%;
@@ -17,8 +17,20 @@
   cursor: pointer;
   font-size: 20px;
   color: rgb(71, 71, 71);
+  text-transform: uppercase;
 }
 
 .button:hover {
   background-color: rgba(199, 248, 167, 0.562);
+}
+
+@media screen and (max-width: 600px) {
+  .button {
+    font-size: 18px;
+  }
+  .container {
+    min-height: 40px;
+    /* padding: 3px; */
+    min-width: 40px;
+  }
 }

@@ -69,6 +69,12 @@
   background-color: rgb(199, 251, 199);
 }
 
+.clearButton {
+  background-color: transparent;
+  border: none;
+  color: grey;
+}
+
 @media only screen and (max-width: 1000px) {
   .enterButtonContainer {
     margin-left: 0;
@@ -85,10 +91,22 @@
     padding: 0;
     margin-block: 10px;
   }
+  .enterButton {
+    font-size: 16px;
+    padding: 7px 22px;
+  }
   .container {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   .headerTitle {
     margin-bottom: 1rem;
+  }
+  .headerTitle {
+    text-align: center;
+    padding-top: 1.5rem;
+    font-size: 24px;
+  }
+  .instruction {
+    font-size: 16px;
   }
 }
