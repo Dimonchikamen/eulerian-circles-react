@@ -1,6 +1,6 @@
 import { Operation } from "../Shared/Orepations";
 import { Combine } from "../Types/Combine";
-import { TruthTable } from "../Types/TruthTable";
+import { createTruthTable } from "../Types/TruthTable";
 
 export class Interpretator {
     private static unaryOperations = new Map([
@@ -19,14 +19,14 @@ export class Interpretator {
         if (!this.isValidate(exp)) {
             throw Error("Выражение составлено неверно");
         }
-        const variables = this.getVariables(exp)
+        const variables = this.getVariables(exp);
         const polishString =  this.convertToPolishNotation(exp);
         const combines = this.getVariablesCombines(variables);
         const results: boolean[] = [];
         for (let combine of combines) {
             results.push(this.calculate(polishString, combine)!);
         }
-        return new TruthTable(variables, combines, results);
+        return createTruthTable(variables, combines, results);
     }
 
     static convertToPolishNotation(exp: string) {

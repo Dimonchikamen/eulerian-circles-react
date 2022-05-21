@@ -1,9 +1,11 @@
-import EulerCircles from "./Components/EulerCircles/EulerCircles";
 import PageHeader from "./Components/PageHeader/PageHeader";
 import { css } from "@emotion/css";
 import { useState } from "react";
 import TableConstructor from "./Components/Table/Table";
 import { TruthTable } from "./Types/TruthTable";
+import { EulerCirclesPage } from "Components/EulerCirclesPage/EulerCirclesPage";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Tab, Tabs } from "react-bootstrap";
 
 function App() {
   const [table, setTable] = useState<TruthTable | null>(null);
@@ -14,32 +16,17 @@ function App() {
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <PageHeader onSubmit={handleSubmit} />
-        <div
-          className={
-            table && table.variables.length > 0 && table.variables.length <= 4
-              ? styles.circles
-              : styles.noCircles
-          }
-        >
-          {table &&
-            table.variables.length > 0 &&
-            table.variables.length <= 4 && <EulerCircles table={table} />}
-          {table && (
-            <TableConstructor headers={table.headers} data={table.body} />
-          )}
-          {!table && (
-            <div className={styles.infoHelp}>
-              <span style={{ fontSize: "19px", textTransform: "none" }}>
-                &#x24D8;
-              </span>
-              &#xA0; Введите что-нибудь, чтобы получить круги Эйлера (до 4-х
-              переменных) и таблицу истинности
-            </div>
-          )}
-        </div>
-      </div>
+    <Tabs>
+      <Tab title="Эйлеровые круги"></Tab>
+      <Tab title='Логический решатель'></Tab>
+    </Tabs>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/euler_circle" element={<EulerCirclesPage />} />
+        <Route path="/logical_solver"  element={<EulerCirclesPage />}  />
+        <Route path='*' element={<Navigate to='/euler_circle' />} />
+      </Routes>
+    </BrowserRouter>
     </>
   );
 }

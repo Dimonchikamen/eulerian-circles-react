@@ -1,39 +1,40 @@
-import React, { createRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Operation } from "../../Shared/Orepations";
 import styles from "./PageHeader.module.css";
 import SymbolButton from "../../UiKit/SymbolButton/SymbolButton";
-// import { Button } from "react-bootstrap";
 import { TruthTable } from "../../Types/TruthTable";
 import { Interpretator } from "../../Helpers/Interpretator";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
 
 interface IPageHeader {
-  onSubmit: (table: TruthTable) => void;
+  onSubmit: (table: TruthTable & {filterValue: any}) => void;
+  onFilterValueChange?(filterValue: boolean): void;
 }
 
 const PageHeader = (props: IPageHeader) => {
   const [inputValue, setValue] = useState("");
-  // const [caretPositionIndex, setCaretPosition] = useState<number>(0);
-  const input = createRef<HTMLInputElement>();
+  const input = useRef<HTMLInputElement>();
+
+  const leftExpr = inputValue.split('=')[0];
+  const rightExpr = inputValue.split('=')[1] ?? "";
+
+  useEffect(()=>{    
+      props.onFilterValueChange?.(rightExpr == "1" ? true : rightExpr == "0" ? false : null);
+  }, [rightExpr])
 
   const handleClick = (symbol: string) => {
-    // console.log(caretPositionIndex);
-    setValue((prevValue) => prevValue + symbol); //{
-    // const left = prevValue.slice(0, caretPositionIndex!);
-    // const right = prevValue.slice(caretPositionIndex!);
-    // setCaretPosition(input.current!.selectionStart!);
-    // return left + symbol + right;
-    // });
-    //setCaretPosition(input.current!.selectionStart!);
+    const cursor = input.current.selectionStart
+    setValue((prevValue) => {
+      const leftPart = prevValue.substring(0, cursor);
+      const rightPart = prevValue.substring(cursor);
+      return leftPart + symbol + rightPart;      
+    });
     input.current!.focus();
   };
 
   const handleSubmit = () => {
     try {
-      const truthTable = Interpretator.getTruthTable(inputValue.toLowerCase());
-      props.onSubmit(truthTable);
+      const truthTable = Interpretator.getTruthTable(inputValue.toLowerCase());    
+      props.onSubmit({...truthTable, filterValue: true});
     } catch (e: any) {
       alert(e.message);
     }
@@ -43,24 +44,8 @@ const PageHeader = (props: IPageHeader) => {
     if (e.code === "Enter") {
       handleSubmit();
     }
-    // if (e.key === "ArrowRight") {
-    //   setCaretPosition(input.current!.selectionStart!);
-    // } else if (e.key === "ArrowLeft") {
-    //   setCaretPosition(input.current!.selectionEnd!);
-    // } else if (e.code === "enter") {
-    //   handleSubmit();
-    // }
-    // if (e.code === "backspace") {
-    //   setCaretPosition(input.current!.selectionEnd!);
-    // } else if (caretPositionIndex !== inputValue.length + 1) {
-    //   setCaretPosition(input.current!.selectionStart!);
-    // }
   };
-
-  const handleInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    // console.log(e);
-  };
-
+  
   const clear = () => {
     setValue("");
     input.current!.focus();
@@ -87,7 +72,6 @@ const PageHeader = (props: IPageHeader) => {
             className={styles.input}
             ref={input}
             value={inputValue}
-            onClick={handleInputClick}
             onKeyDown={handleKeyDown}
             onChange={(e) => setValue(e.target.value)}
             autoFocus
