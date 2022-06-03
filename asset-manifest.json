@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/euler_circle/static/css/main.7492bb23.css",
-    "main.js": "/euler_circle/static/js/main.fccbfc7b.js",
-    "static/js/703.fc10767a.chunk.js": "/euler_circle/static/js/703.fc10767a.chunk.js",
-    "static/js/309.1f88a64f.chunk.js": "/euler_circle/static/js/309.1f88a64f.chunk.js",
-    "static/js/787.681333b9.chunk.js": "/euler_circle/static/js/787.681333b9.chunk.js",
-    "static/media/info.svg": "/euler_circle/static/media/info.6ac4a752c1a6de64138a0ca183a14890.svg",
-    "index.html": "/euler_circle/index.html",
-    "static/media/download.svg": "/euler_circle/static/media/download.963380eba224731b2c7c8975b418d0b3.svg",
-    "main.7492bb23.css.map": "/euler_circle/static/css/main.7492bb23.css.map",
-    "main.fccbfc7b.js.map": "/euler_circle/static/js/main.fccbfc7b.js.map",
-    "703.fc10767a.chunk.js.map": "/euler_circle/static/js/703.fc10767a.chunk.js.map",
-    "309.1f88a64f.chunk.js.map": "/euler_circle/static/js/309.1f88a64f.chunk.js.map",
-    "787.681333b9.chunk.js.map": "/euler_circle/static/js/787.681333b9.chunk.js.map"
+    "main.css": "/Eulerian_Circles/static/css/main.7492bb23.css",
+    "main.js": "/Eulerian_Circles/static/js/main.71d221b8.js",
+    "static/js/703.fc10767a.chunk.js": "/Eulerian_Circles/static/js/703.fc10767a.chunk.js",
+    "static/js/309.1f88a64f.chunk.js": "/Eulerian_Circles/static/js/309.1f88a64f.chunk.js",
+    "static/js/787.681333b9.chunk.js": "/Eulerian_Circles/static/js/787.681333b9.chunk.js",
+    "static/media/info.svg": "/Eulerian_Circles/static/media/info.6ac4a752c1a6de64138a0ca183a14890.svg",
+    "index.html": "/Eulerian_Circles/index.html",
+    "static/media/download.svg": "/Eulerian_Circles/static/media/download.963380eba224731b2c7c8975b418d0b3.svg",
+    "main.7492bb23.css.map": "/Eulerian_Circles/static/css/main.7492bb23.css.map",
+    "main.71d221b8.js.map": "/Eulerian_Circles/static/js/main.71d221b8.js.map",
+    "703.fc10767a.chunk.js.map": "/Eulerian_Circles/static/js/703.fc10767a.chunk.js.map",
+    "309.1f88a64f.chunk.js.map": "/Eulerian_Circles/static/js/309.1f88a64f.chunk.js.map",
+    "787.681333b9.chunk.js.map": "/Eulerian_Circles/static/js/787.681333b9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7492bb23.css",
-    "static/js/main.fccbfc7b.js"
+    "static/js/main.71d221b8.js"
   ]
 }
