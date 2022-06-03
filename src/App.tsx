@@ -34,7 +34,7 @@ function App() {
                     <Routes>
                         <Route path="/Eulerian_Circles" element={<EulerCirclesPage theme={theme} />} />
                         <Route path="/Logical_Solver" element={<LogicalSolverPage theme={theme} />} />
-                        <Route path="*" element={<Navigate to="/Euler_Circles" />} />
+                        <Route path="*" element={<Navigate to="/Eulerian_Circles" />} />
                     </Routes>
                 </div>
             </BrowserRouter>
