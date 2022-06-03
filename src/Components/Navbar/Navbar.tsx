@@ -16,7 +16,7 @@ const Navbar = ({ switchTheme, theme }: any) => {
           <input
             type="checkbox"
             checked={theme === "dark"}
-            onClick={() => switchTheme(theme)}
+            onChange={() => switchTheme(theme)}
           />
           <span className={`${s.slider} ${s.round}`}></span>
         </label>

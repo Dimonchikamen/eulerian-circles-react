@@ -1,15 +1,16 @@
 import { css } from "@emotion/css";
 import ExpressionInput from "../ExpressionInput/ExpressionInput";
 import TableConstructor from "Components/Table/TableConstructor";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { createTruthTable, TruthTable } from "Types/TruthTable";
 import { calculate, convertToPolishNotation, getVariables } from "Helpers/Interpretator";
 import { getVariablesCombines } from "Helpers/CombineHelper";
 import { Combine } from "Types/Combine";
 import { isValidate } from "Helpers/Validators";
 import { ValidateType } from "Types/ValidateType";
+import SavePDFButton from "UiKit/SavePDFButton/SavePDFButton";
 
-const LogicalSolverPage = () => {
+const LogicalSolverPage: FC<{ theme: string }> = ({ theme }) => {
     const [table, setTable] = useState<TruthTable | null>(null);
 
     const handleSubmit = (exp: string) => {
@@ -54,12 +55,15 @@ const LogicalSolverPage = () => {
                 </div>
             )}
             {table && (
-                <TableConstructor
-                    title={"РЕШЕНИЕ"}
-                    headers={table.headers}
-                    data={table.body}
-                    isLogicalSolver={true}
-                />
+                <>
+                    <TableConstructor
+                        title={"РЕШЕНИЕ"}
+                        headers={table.headers}
+                        data={table.body}
+                        isLogicalSolver={true}
+                    />
+                    <SavePDFButton theme={theme} />
+                </>
             )}
 
         </div>

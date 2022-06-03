@@ -56,7 +56,7 @@ export const convertToPolishNotation = (exp: string) => {
 
         if (isConstant(currSymbol)) {
             stack.push(currSymbol);
-        } 
+        }
 
         if (isOperation(currSymbol)) {
             while (stack.length > 0) {

@@ -1,16 +1,16 @@
 .container {
-  display: grid;
-  place-items: center;
-  margin-block: 1rem 2rem;
-  /* color:rgb(91, 91, 91) */
+    display: grid;
+    place-items: center;
+    margin-block: 1rem 2rem;
+    /* color:rgb(91, 91, 91) */
 }
 
 .drawField {
-  /* border: 1px solid grey; */
+    /* border: 1px solid grey; */
 }
 
 @media only screen and (max-width: 1000px) {
-  .container {
-    margin-block: 1rem 2rem;
-  }
+    .container {
+        margin-block: 1rem 2rem;
+    }
 }

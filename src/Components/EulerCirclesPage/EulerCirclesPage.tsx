@@ -18,48 +18,46 @@ export function EulerCirclesPage({ theme }: { theme: string }) {
     };
 
     return (
-        <>
-            <div className={s.wrapper}>
-                <ExpressionInput
-                    title={"КРУГИ ЭЙЛЕРА"}
-                    onSubmit={handleSubmit}
-                />
-                <div
-                    id="capture"
-                    className={
-                        table && table.variables.length > 0 && table.variables.length <= 4
-                            ? s.circles
-                            : ""
-                    }
-                >
-                    {table &&
-                        table.variables.length > 0 &&
-                        table.variables.length <= 4 && (
-                            <EulerCircles table={table} theme={theme} />
-                        )
-                    }
-                    {table && (
-                        <>
-                            <TableConstructor
-                                title={"ТАБЛИЦА ИСТИННОСТИ"}
-                                headers={table.headers}
-                                data={table.body}
-                                isLogicalSolver={false}
-                            />
-                            <SavePDFButton theme={theme} />
-                        </>
-                    )}
-                    {!table && (
-                        <div className={s.info_help}>
-                            <img src={info_img} alt="" className={s.info_img} />
-                            <div className={s.text}>
-                                Введите что-нибудь, чтобы получить круги Эйлера (до 4-х
-                                переменных) и таблицу истинности
-                            </div>
+        <div className={s.wrapper}>
+            <ExpressionInput
+                title={"КРУГИ ЭЙЛЕРА"}
+                onSubmit={handleSubmit}
+            />
+            <div
+                id="capture"
+                className={
+                    table && table.variables.length > 0 && table.variables.length <= 4
+                        ? s.circles
+                        : ""
+                }
+            >
+                {table &&
+                    table.variables.length > 0 &&
+                    table.variables.length <= 4 && (
+                        <EulerCircles table={table} theme={theme} />
+                    )
+                }
+                {table && (
+                    <>
+                        <TableConstructor
+                            title={"ТАБЛИЦА ИСТИННОСТИ"}
+                            headers={table.headers}
+                            data={table.body}
+                            isLogicalSolver={false}
+                        />
+                        <SavePDFButton theme={theme} />
+                    </>
+                )}
+                {!table && (
+                    <div className={s.info_help}>
+                        <img src={info_img} alt="" className={s.info_img} />
+                        <div className={s.text}>
+                            Введите что-нибудь, чтобы получить круги Эйлера (до 4-х
+                            переменных) и таблицу истинности
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
-        </>
+        </div>
     );
 }

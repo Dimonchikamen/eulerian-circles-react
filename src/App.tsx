@@ -23,11 +23,8 @@ function App() {
                 <Navbar switchTheme={switchTheme} theme={theme} />
                 <div className={s.content}>
                     <Routes>
-                        <Route
-                            path="/euler_circle"
-                            element={<EulerCirclesPage theme={theme} />}
-                        />
-                        <Route path="/logical_solver" element={<LogicalSolverPage />} />
+                        <Route path="/euler_circle" element={<EulerCirclesPage theme={theme} />} />
+                        <Route path="/logical_solver" element={<LogicalSolverPage theme={theme} />} />
                         <Route path="*" element={<Navigate to="/euler_circle" />} />
                     </Routes>
                 </div>
