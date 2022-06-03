@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Eulerian_Circles/static/css/main.1dbea5f1.css",
-    "main.js": "/Eulerian_Circles/static/js/main.3aff400d.js",
+    "main.js": "/Eulerian_Circles/static/js/main.273d988b.js",
     "static/js/703.fc10767a.chunk.js": "/Eulerian_Circles/static/js/703.fc10767a.chunk.js",
     "static/js/628.c0849249.chunk.js": "/Eulerian_Circles/static/js/628.c0849249.chunk.js",
     "static/js/787.681333b9.chunk.js": "/Eulerian_Circles/static/js/787.681333b9.chunk.js",
@@ -9,13 +9,13 @@
     "index.html": "/Eulerian_Circles/index.html",
     "static/media/download.svg": "/Eulerian_Circles/static/media/download.963380eba224731b2c7c8975b418d0b3.svg",
     "main.1dbea5f1.css.map": "/Eulerian_Circles/static/css/main.1dbea5f1.css.map",
-    "main.3aff400d.js.map": "/Eulerian_Circles/static/js/main.3aff400d.js.map",
+    "main.273d988b.js.map": "/Eulerian_Circles/static/js/main.273d988b.js.map",
     "703.fc10767a.chunk.js.map": "/Eulerian_Circles/static/js/703.fc10767a.chunk.js.map",
     "628.c0849249.chunk.js.map": "/Eulerian_Circles/static/js/628.c0849249.chunk.js.map",
     "787.681333b9.chunk.js.map": "/Eulerian_Circles/static/js/787.681333b9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1dbea5f1.css",
-    "static/js/main.3aff400d.js"
+    "static/js/main.273d988b.js"
   ]
 }
