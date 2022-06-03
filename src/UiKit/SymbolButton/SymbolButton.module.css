@@ -16,12 +16,12 @@
   border: 1px solid grey;
   cursor: pointer;
   font-size: 20px;
-  color: rgb(71, 71, 71);
   text-transform: uppercase;
+  color: var(--text-primary);
 }
 
 .button:hover {
-  background-color: rgba(199, 248, 167, 0.562);
+  background-color: var(--accent);
 }
 
 @media screen and (max-width: 600px) {

@@ -1,0 +1,18 @@
+.tabs {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.app {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+.tab {
+  background-color: var(--background);
+}
+
+.content {
+  margin-top: 60px; /* navbar height */
+  height: auto;
+}

@@ -9,14 +9,15 @@ export function draw(
   width: number,
   height: number,
   lineWidth = 1,
-  radius = 165
+  radius = 165,
+  theme: string
 ) {
   const variables = table.variables;
   const body = table.body;
   const circles = getCircles(variables, width, height, radius);
   circles.forEach((circle) => {
     drawCircle(ctx, lineWidth, circle.center, radius);
-    drawText(ctx, circle.name, circle.namePosition);
+    drawText(ctx, circle.name, circle.namePosition, theme);
   });
 
   for (let i = 0; i < width; i += 2) {
@@ -30,8 +31,7 @@ export function draw(
             const circle = circles[k];
             subResult =
               subResult &&
-              getDistance(circle.center, curPoint) < radius ===
-              Boolean(row[k]);
+              getDistance(circle.center, curPoint) < radius === Boolean(row[k]);
           }
           if (subResult) {
             ctx.lineWidth = lineWidth;
@@ -61,11 +61,12 @@ function drawCircle(
 function drawText(
   ctx: CanvasRenderingContext2D,
   text: string,
-  position: Point
+  position: Point,
+  theme: string
 ) {
   const oldColor = ctx.fillStyle;
   const oldFont = ctx.font;
-  ctx.fillStyle = "black";
+  ctx.fillStyle = theme === "light" ? "black" : "white";
   ctx.font = `${fontSize}px serif`;
   ctx.fillText(text, position.x, position.y);
   ctx.fillStyle = oldColor;
@@ -85,12 +86,7 @@ function getCircles(
   circleRadius: number
 ) {
   const result = [];
-  const centres = getCentres(
-    variables.length,
-    width,
-    height,
-    circleRadius
-  );
+  const centres = getCentres(variables.length, width, height, circleRadius);
   for (let i = 0; i < centres.length; i++) {
     const namePosition = getNamePosition(
       centres[i],
@@ -122,26 +118,26 @@ function getNamePosition(
     return circleCenter.y === center.y
       ? ({ x: circleCenter.x - positionOffset, y: circleCenter.y } as Point)
       : circleCenter.y < center.y
-        ? ({
+      ? ({
           x: circleCenter.x - nonCetrePositionOffset,
           y: circleCenter.y - nonCetrePositionOffset,
         } as Point)
-        : ({
+      : ({
           x: circleCenter.x - nonCetrePositionOffset,
           y: circleCenter.y + nonCetrePositionOffset + fontOffset,
         } as Point);
   } else {
     return circleCenter.y === center.y
       ? ({
-        x: circleCenter.x + positionOffset - fontOffset,
-        y: circleCenter.y,
-      } as Point)
+          x: circleCenter.x + positionOffset - fontOffset,
+          y: circleCenter.y,
+        } as Point)
       : circleCenter.y < center.y
-        ? ({
+      ? ({
           x: circleCenter.x + nonCetrePositionOffset - fontOffset,
           y: circleCenter.y - nonCetrePositionOffset,
         } as Point)
-        : ({
+      : ({
           x: circleCenter.x + nonCetrePositionOffset - fontOffset,
           y: circleCenter.y + nonCetrePositionOffset + fontOffset,
         } as Point);

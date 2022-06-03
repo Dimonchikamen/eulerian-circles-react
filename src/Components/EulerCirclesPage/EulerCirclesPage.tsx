@@ -5,7 +5,7 @@ import { useState } from "react";
 import TableConstructor from "../Table/Table";
 import { TruthTable } from "Types/TruthTable";
 
-export function EulerCirclesPage() {
+export function EulerCirclesPage({ theme }: { theme: string }) {
   const [table, setTable] = useState<TruthTable | null>(null);
   const [filterValue, setFilterValue] = useState<boolean>();
 
@@ -16,7 +16,10 @@ export function EulerCirclesPage() {
   return (
     <>
       <div className={styles.wrapper}>
-        <PageHeader onSubmit={handleSubmit} onFilterValueChange={setFilterValue} />
+        <PageHeader
+          onSubmit={handleSubmit}
+          onFilterValueChange={setFilterValue}
+        />
         <div
           className={
             table && table.variables.length > 0 && table.variables.length <= 4
@@ -24,11 +27,18 @@ export function EulerCirclesPage() {
               : styles.noCircles
           }
         >
-          {!filterValue && table &&
+          {!filterValue &&
+            table &&
             table.variables.length > 0 &&
-            table.variables.length <= 4 && <EulerCircles table={table} />}
+            table.variables.length <= 4 && (
+              <EulerCircles table={table} theme={theme} />
+            )}
           {table && (
-            <TableConstructor headers={table.headers} data={table.body} filterValue={filterValue} />
+            <TableConstructor
+              headers={table.headers}
+              data={table.body}
+              filterValue={filterValue}
+            />
           )}
           {!table && (
             <div className={styles.infoHelp}>
@@ -47,9 +57,9 @@ export function EulerCirclesPage() {
 
 const styles = {
   wrapper: css`
-    width: 80%;
+    min-height: calc(100vh - 60px);
     margin: 0 auto;
-    height: 100vh;
+    width: 80%;
   `,
   circles: css`
     @media (min-width: 1000px) {
@@ -60,8 +70,8 @@ const styles = {
   noCircles: css``,
   infoHelp: css`
     font-size: 18px;
+    color: var(--text-secondary);
     text-transform: uppercase;
-    color: rgb(91, 91, 91);
     margin-top: 1rem;
     display: inline-block;
     @media (max-width: 600px) {

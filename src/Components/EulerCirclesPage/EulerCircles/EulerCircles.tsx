@@ -5,6 +5,7 @@ import styles from "./EulerCircles.module.css";
 
 interface IEulerCircles {
   table: TruthTable;
+  theme: string;
 }
 
 const EulerCircles = (props: IEulerCircles) => {
@@ -14,7 +15,7 @@ const EulerCircles = (props: IEulerCircles) => {
     if (table.variables.length !== 0) {
       resize();
     }
-  }, [table]);  
+  }, [table]);
 
   function resize() {
     const canvas: HTMLCanvasElement = document.getElementById(
@@ -24,7 +25,7 @@ const EulerCircles = (props: IEulerCircles) => {
     function resizeCanvas() {
       if (window.innerWidth >= 1300) {
         canvas.width = window.innerWidth * 0.4;
-        canvas.height = window.innerHeight * 0.65;               
+        canvas.height = window.innerHeight * 0.65;
       } else if (window.innerWidth >= 1000) {
         canvas.width = window.innerWidth * 0.4;
         canvas.height = window.innerHeight * 0.65;
@@ -38,7 +39,15 @@ const EulerCircles = (props: IEulerCircles) => {
         canvas.width = window.innerWidth * 0.82;
         canvas.height = window.outerHeight * 0.45;
       }
-      draw(ctx, table, canvas.width, canvas.height, 3, Math.min(canvas.width, canvas.height) / 4);
+      draw(
+        ctx,
+        table,
+        canvas.width,
+        canvas.height,
+        3,
+        Math.min(canvas.width, canvas.height) / 4,
+        props.theme
+      );
     }
     resizeCanvas();
   }

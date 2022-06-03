@@ -14,14 +14,12 @@
 
 .headerTitle {
   text-align: right;
-  padding-top: 2rem;
+  padding-top: 1rem;
   font-size: 28px;
-  color: rgb(41, 41, 41);
 }
 
 .instruction {
   font-size: 18px;
-  color: rgb(41, 41, 41);
 }
 
 .inputContainer {
@@ -39,10 +37,11 @@
   height: 3rem;
   padding: 25px;
   width: 100%;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
 }
 .input::placeholder {
   font-style: italic;
-  color: rgb(169, 169, 169);
 }
 .input:focus {
   outline: none !important;
@@ -62,11 +61,11 @@
   background-color: transparent;
   border: 1px solid grey;
   transition: all 0.4s;
-  color: rgb(41, 41, 41);
+  color: var(--text-primary);
 }
 
 .enterButton:hover {
-  background-color: rgb(199, 251, 199);
+  background-color: var(--accent);
 }
 
 .clearButton {

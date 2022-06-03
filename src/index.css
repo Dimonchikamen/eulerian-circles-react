@@ -13,3 +13,52 @@ code {
   /* font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace; */
 }
+
+:root {
+  --background: white;
+  --text-primary: black;
+  --shadow: rgba(0, 0, 0, 0.133);
+  --text-secondary: rgb(195, 195, 195);
+  --accent: rgb(159, 255, 159);
+  --input-bg: white;
+  --navbar-bg: white;
+}
+[data-theme="dark"] {
+  --background: #1d1d1d;
+  --text-primary: rgba(255, 255, 255, 0.79);
+  --shadow: rgba(243, 243, 243, 0.157);
+  --text-secondary: rgb(160, 160, 160);
+  --accent: rgb(101, 192, 101);
+  --input-bg: rgb(47, 47, 47);
+  --navbar-bg: #121212;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  padding: 0 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #dadada;
+}
+
+::selection {
+  background: rgba(255, 221, 45, 0.32);
+}
+
+::-moz-selection {
+  background: rgba(255, 221, 45, 0.32);
+}
