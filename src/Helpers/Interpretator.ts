@@ -1,253 +1,150 @@
-import { Operation } from "../Shared/Orepations";
+import { isOperation, isUnarOperation, operations, unaryOperations } from "Shared/Operations";
+import { ValidateType } from "Types/ValidateType";
+import { OperationType } from "../Shared/OrepationType";
 import { Combine } from "../Types/Combine";
 import { createTruthTable } from "../Types/TruthTable";
+import { getVariablesCombines } from "./CombineHelper";
+import { isValidate } from "./Validators";
 
-export class Interpretator {
-    private static unaryOperations = new Map([
-        [Operation.NOT, (a: boolean) => !a],
-    ]);
+export const getTruthTable = (exp: string, type: ValidateType) => {
+    if (!isValidate(exp, type)) {
+        throw Error("Выражение составлено неверно");
+    }
+    const variables = getVariables(exp);
+    const polishString = convertToPolishNotation(exp);
+    const combines = getVariablesCombines(variables);
+    const results: boolean[] = [];
+    for (let combine of combines) {
+        results.push(calculate(polishString, combine)!);
+    }
+    return createTruthTable(variables, combines, results);
+}
 
-    private static operations = new Map([
-        [Operation.OR, (a: boolean, b: boolean) => a || b],
-        [Operation.AND, (a: boolean, b: boolean) => a && b],
-        [Operation.IMPLICATION, (a: boolean, b: boolean) => !a || b],
-        [Operation.EQUALITY, (a: boolean, b: boolean) => (!a && !b) || (a && b)],
-        [Operation.XOR, (a: boolean, b: boolean) => (!a && b) || (a && !b)]
-    ]);
+export const convertToPolishNotation = (exp: string) => {
+    const input = exp.concat().toLocaleLowerCase();
+    const stack = [];
+    const result: string[] = [];
+    for (let i = 0; i < input.length; i++) {
+        let currSymbol = input[i];
 
-    static getTruthTable(exp: string) {
-        if (!this.isValidate(exp)) {
-            throw Error("Выражение составлено неверно");
+        if (isVariable(currSymbol) || isConstant(currSymbol)) {
+            result.push(currSymbol);
+            continue;
         }
-        const variables = this.getVariables(exp);
-        const polishString =  this.convertToPolishNotation(exp);
-        const combines = this.getVariablesCombines(variables);
-        const results: boolean[] = [];
-        for (let combine of combines) {
-            results.push(this.calculate(polishString, combine)!);
+
+        if (isUnarOperation(currSymbol)) {
+            stack.push(currSymbol);
         }
-        return createTruthTable(variables, combines, results);
+
+        if (currSymbol === "(") {
+            stack.push(currSymbol);
+        }
+
+        if (currSymbol === ")") {
+            while (true) {
+                let nexChar = stack.pop();
+                if (!nexChar) {
+                    throw Error("Неверное выражение");
+                }
+
+                if (nexChar === "(") {
+                    break;
+                }
+                result.push(nexChar);
+            }
+        }
+
+        if (isConstant(currSymbol)) {
+            stack.push(currSymbol);
+        } 
+
+        if (isOperation(currSymbol)) {
+            while (stack.length > 0) {
+                let top = stack[stack.length - 1];
+                if (!(isUnarOperation(top) || isPriorityThen(top, currSymbol))) break;
+
+                result.push(top);
+                stack.pop();
+            }
+            stack.push(currSymbol);
+        }
     }
 
-    static convertToPolishNotation(exp: string) {
-        const input = exp.concat().toLocaleLowerCase();
-        const stack = [];
-        const result: string[] = [];
-        for (let i = 0; i < input.length; i++) {
-            let currSymbol = input[i];
-
-            if (this.isVariable(currSymbol)) {
-                result.push(currSymbol);
-                continue;
-            }
-
-            if (this.isUnarOperation(currSymbol)) {
-                stack.push(currSymbol);
-            }
-
-            if (currSymbol === "(") {
-                stack.push(currSymbol);
-            }
-
-            if (currSymbol === ")") {
-                while (true) {
-                    let nexChar = stack.pop();
-
-                    if (!nexChar) {
-                        throw Error("Неверное выражение");
-                    }
-
-                    if (nexChar === "(") {
-                        break;
-                    }
-                    result.push(nexChar);
-                }
-            }
-
-            if (this.isOperation(currSymbol)) {
-                while (stack.length > 0) {
-                    let top = stack[stack.length - 1];
-                    if (!(this.isUnarOperation(top) || this.isPriorityThen(top, currSymbol))) break;
-
-                    result.push(top);
-                    stack.pop();
-                }
-                stack.push(currSymbol);
-            }
-        }
-
-        while (stack.length > 0) {
-            result.push(stack.pop()!);
-        }
-
-        return result.join("");
+    while (stack.length > 0) {
+        result.push(stack.pop()!);
     }
 
-    static getVariables(exp: string) {
-        const result: string[] = []
-        for(let symbol of exp) {
-            if (this.isVariable(symbol) && !result.includes(symbol)) {
-                result.push(symbol);
+    return result.join("");
+}
+
+export const calculate = (polishString: string, combine: Combine) => {
+    const stack: boolean[] = [];
+    for (let symbol of polishString) {
+
+        if (isConstant(symbol)) {
+            if (symbol === "0") {
+                stack.push(false);
+            } else {
+                stack.push(true);
             }
         }
-        return result;
+
+        if (isVariable(symbol)) {
+            stack.push(combine[symbol]);
+        }
+
+        if (isUnarOperation(symbol)) {
+            const top = stack.pop();
+            const operationResult = unaryOperations.get(symbol as OperationType)!(top!);
+            stack.push(operationResult);
+        }
+
+        if (isOperation(symbol)) {
+            const second = stack.pop();
+            const first = stack.pop();
+            const operationResult = operations.get(symbol as OperationType)!(first!, second!);
+            stack.push(operationResult);
+        }
     }
+    return stack.pop();
+}
 
-    private static isValidate(expression: string) {
-        if (expression.length === 0) return false;
-        const stack = [];
-        for (let i = 0; i < expression.length; i++) {
-            const symbol = expression[i];
-            const previousSymbol = i === 0 ? null : expression[i - 1];
-            const nextSymbol = i === expression.length - 1 ? null : expression[i + 1];
+export const isConstant = (symbol: string) => symbol === "1" || symbol === "0";
 
-            if (this.isOperation(symbol) && !this.operationIsValid(previousSymbol, nextSymbol)) {
-                return false;
-            }
-
-            if (this.isUnarOperation(symbol) && !this.unarOperationIsValid(previousSymbol, nextSymbol)) {
-                return false;
-            }
-
-            if (symbol === "(") {
-                stack.push(symbol);
-            }
-
-            if (symbol === ")") {
-                const top = stack.pop();
-                if (!top) {
-                    return false;
-                }
-            }
-
-            if (this.isVariable(symbol) && !this.variableIsValid(previousSymbol, nextSymbol)) {
-                return false;
-            }
+export const isVariable = (symbol: string | null) => {
+    if (!symbol) return false;
+    const str = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz";
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === symbol) {
+            return true;
         }
-        if (stack.length !== 0) {
+    }
+    return false;
+}
+
+export const getVariables = (exp: string) => {
+    const result: string[] = []
+    for (let symbol of exp) {
+        if (isVariable(symbol) && !result.includes(symbol)) {
+            result.push(symbol);
+        }
+    }
+    return result;
+}
+
+const isPriorityThen = (top: string, current: string) => {
+    switch (top) {
+        case OperationType.EQUALITY:
+            return current === OperationType.EQUALITY;
+        case OperationType.IMPLICATION:
+            return current === OperationType.IMPLICATION;
+        case OperationType.OR || OperationType.XOR:
+            return current === OperationType.OR || current === OperationType.XOR;
+        case OperationType.AND:
+            return current !== OperationType.NOT;
+        case OperationType.NOT:
+            return true;
+        default:
             return false;
-        }
-        return true;
-    }
-
-    private static variableIsValid(previousSymbol: string|null, nextSymbol: string|null) {
-        const previousSymbolIsValid = previousSymbol ? !this.isVariable(previousSymbol) : true;
-        const nextSymbolIsValid = nextSymbol ? !this.isVariable(nextSymbol) : true;
-        return previousSymbolIsValid && nextSymbolIsValid;
-    }
-
-    private static operationIsValid(previousSymbol: string|null, nextSymbol: string|null) {
-        const previousSymbolIsValid = previousSymbol ? this.isVariable(previousSymbol) || previousSymbol === ")" : false;
-        const nextSymbolIsValid = nextSymbol ? this.isVariable(nextSymbol) || this.isUnarOperation(nextSymbol) || nextSymbol === "(" : false;
-        return previousSymbolIsValid && nextSymbolIsValid;
-    }
-
-    private static unarOperationIsValid(previousSymbol: string|null, nextSymbol: string|null) {
-        const previousSymbolIsValid = previousSymbol ? this.isOperation(previousSymbol) || this.isOperation(previousSymbol) || previousSymbol === "(" : true; 
-        const nextSymbolIsValid = nextSymbol ? this.isVariable(nextSymbol) || nextSymbol === "(" : false;
-        return previousSymbolIsValid && nextSymbolIsValid;
-    }
-
-    private static calculate(polishString: string, combine: Combine) {
-        const stack: boolean[] = [];
-        for (let symbol of polishString) {
-
-            if (this.isVariable(symbol)) {
-                stack.push(combine[symbol]);
-            }
-
-            if (this.isUnarOperation(symbol)) {
-                const top = stack.pop();
-                const operationResult = this.unaryOperations.get(symbol as Operation)!(top!);
-                stack.push(operationResult);
-            }
-
-            if (this.isOperation(symbol)) {
-                const second = stack.pop();
-                const first = stack.pop();
-                const operationResult = this.operations.get(symbol as Operation)!(first!, second!);
-                stack.push(operationResult);
-            }
-        }
-        return stack.pop();
-    }
-
-    private static getVariablesCombines(variables: string[]): Combine[] {
-        const result: Combine[] = [];
-        const startCombine = this.getStartStringCombine(variables);
-        for (let i = 0; i < Math.pow(2, variables.length); i++) {
-            let stringCombine = (parseInt(startCombine, 2) + i).toString(2);
-            stringCombine = this.addZeros(variables, stringCombine);
-            const combine = this.getCombine(variables, stringCombine);
-            result.push(combine);
-        }
-        return result;
-    }
-
-    private static addZeros(variables: string[], stringCombine: string) {
-        if (stringCombine.length === variables.length) {
-            return stringCombine;
-        } else {
-            let zeros = this.getStringZeros(variables.length - stringCombine.length);
-            return zeros + stringCombine;
-        }
-    }
-
-    private static getStringZeros(count: number) {
-        let result = "";
-        for (let i = 0; i < count; i ++) {
-            result += "0";
-        }
-        return result;
-    }
-
-    private static getCombine(variables: string[], combineString: string): Combine {
-        const result: Combine = {};
-        for (let i = 0; i < variables.length; i++) {
-            result[variables[i]] = Boolean(parseInt(combineString[i]));
-        }
-        return result;
-    }
-
-    private static getStartStringCombine(variables: string[]): string {
-        let result = "";
-        variables.forEach(variable => { result += "0" });
-        return result;
-    }
-
-    private static isVariable(symbol: string|null) {
-        if (!symbol) return false;
-        const str = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz";
-        for (let i = 0; i < str.length; i++) {
-            if (str[i] === symbol) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static isOperation(operation: string) {
-        return this.operations.has(operation as Operation) as boolean;
-    }
-
-    private static isUnarOperation(operation: string) {
-        return this.unaryOperations.has(operation as Operation) as boolean;
-    }
-
-    private static isPriorityThen(top: string, current: string) {
-        switch (top) {
-            case Operation.EQUALITY:
-                return current === Operation.EQUALITY;
-            case Operation.IMPLICATION:
-                return current === Operation.IMPLICATION;
-            case Operation.OR || Operation.XOR:
-                return current === Operation.OR || current === Operation.XOR;
-            case Operation.AND:
-                return current !== Operation.NOT;
-            case Operation.NOT:
-                return true;
-            default:
-                return false;
-        }
     }
 }

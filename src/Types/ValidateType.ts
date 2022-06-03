@@ -1,0 +1,4 @@
+export enum ValidateType {
+    EULER_CIRCLES = "EULER_CIRCLES",
+    LOGICAL_SOLVER = "LOGICAL_SOLVER"
+}

@@ -1,4 +1,4 @@
-export enum Operation {
+export enum OperationType {
     NOT = "¬",
     AND = "∧",
     OR = "∨",
