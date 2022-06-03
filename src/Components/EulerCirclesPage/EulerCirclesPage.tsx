@@ -1,6 +1,5 @@
 import EulerCircles from "./EulerCircles/EulerCircles";
 import PageHeader from "../PageHeader/PageHeader";
-import { css } from "@emotion/css";
 import { useState } from "react";
 import TableConstructor from "../Table/Table";
 import { TruthTable } from "Types/TruthTable";
@@ -44,9 +43,7 @@ export function EulerCirclesPage({ theme }: { theme: string }) {
                 data={table.body}
                 filterValue={filterValue}
               />
-              <div onClick={() => {}}>
-                <SavePDFButton theme={theme} />
-              </div>
+              <SavePDFButton theme={theme} />
             </>
           )}
           {!table && (
@@ -63,35 +60,3 @@ export function EulerCirclesPage({ theme }: { theme: string }) {
     </>
   );
 }
-
-// const styles = {
-//   wrapper: css`
-//     min-height: calc(100vh - 60px);
-//     margin: 0 auto;
-//     width: 80%;
-//   `,
-//   circles: css`
-//     @media (min-width: 1000px) {
-//       display: flex;
-//       gap: 20px;
-//     }
-//   `,
-//   noCircles: css``,
-//   infoHelp: css`
-//     font-size: 18px;
-//     color: var(--text-secondary);
-//     text-transform: uppercase;
-//     margin-top: 1rem;
-//     display: flex;
-//     @media (max-width: 600px) {
-//       font-size: 16px;
-//     }
-//   `,
-//   info_img: css`
-//     width: 18px;
-//     height: 20px;
-//   `,
-//   text: css`
-//     line-height: 20px;
-//   `,
-// };
