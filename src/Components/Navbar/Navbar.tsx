@@ -5,10 +5,10 @@ const Navbar = ({ switchTheme, theme }: any) => {
   return (
     <div className={s.navbar}>
       <ul className={s.links}>
-        <Link to="/euler_circle" className={s.navLink}>
+        <Link to="/Eulerian_Circles" className={s.navLink}>
           Эйлеровые круги
         </Link>
-        <Link to="/logical_solver" className={s.navLink}>
+        <Link to="/Logical_Solver" className={s.navLink}>
           Логический решатель
         </Link>
         <div className={s.dark_mode}>dark mode</div>

@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LogicalSolverPage from "Components/LogicalSolverPage/LogicalSolverPage";
 import s from "./App.module.css";
 import Navbar from "Components/Navbar/Navbar";
+import { Tab, Tabs } from "react-bootstrap";
 
 function App() {
     const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -19,6 +20,14 @@ function App() {
 
     return (
         <div className={s.app} data-theme={theme}>
+            {/* <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+                <Tab eventKey="home" title="Эй">
+                    <EulerCirclesPage theme={theme} />
+                </Tab>
+                <Tab eventKey="profile" title="Profile">
+                    <LogicalSolverPage theme={theme} />
+                </Tab>
+            </Tabs> */}
             <BrowserRouter>
                 <Navbar switchTheme={switchTheme} theme={theme} />
                 <div className={s.content}>
