@@ -1,6 +1,6 @@
 {
   "name": "eulerian_circles",
-  "homepage": "https://dimonchikamen.github.io/Eulerian_Circles",
+  "homepage": "https://dimonchikamen.github.io/euler_circle",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,8 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "bootstrap": "^5.1.3",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.2",
     "react-dom": "^17.0.2",

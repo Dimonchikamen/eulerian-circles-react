@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./Navbar.module.css";
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ switchTheme, theme }: any) => {
   return (
@@ -12,7 +12,7 @@ const Navbar = ({ switchTheme, theme }: any) => {
         <Link to="/logical_solver" className={s.navLink}>
           Логический решатель
         </Link>
-        <div>dark mode</div>
+        <div className={s.dark_mode}>dark mode</div>
         <label className={s.switch}>
           <input
             type="checkbox"

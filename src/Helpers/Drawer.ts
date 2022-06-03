@@ -16,7 +16,7 @@ export function draw(
   const body = table.body;
   const circles = getCircles(variables, width, height, radius);
   circles.forEach((circle) => {
-    drawCircle(ctx, lineWidth, circle.center, radius);
+    drawCircle(ctx, lineWidth, circle.center, radius, theme);
     drawText(ctx, circle.name, circle.namePosition, theme);
   });
 
@@ -35,7 +35,7 @@ export function draw(
           }
           if (subResult) {
             ctx.lineWidth = lineWidth;
-            ctx.fillStyle = "green";
+            ctx.fillStyle = theme === "light" ? "#66ff00" : "#ceb0f6";
             ctx.fillRect(i, j, 1, 1);
           }
         }
@@ -49,8 +49,11 @@ function drawCircle(
   ctx: CanvasRenderingContext2D,
   lineWidth: number,
   center: Point,
-  radius: number
+  radius: number,
+  theme: string
 ) {
+  ctx.strokeStyle = theme === "light" ? "black" : "white";
+  ctx.fillStyle = theme === "light" ? "black" : "white";
   ctx.lineWidth = lineWidth;
   ctx.beginPath();
   ctx.arc(center.x, center.y, radius, 0, Math.PI * 2, true);

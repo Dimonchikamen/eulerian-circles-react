@@ -17,6 +17,10 @@ const EulerCircles = (props: IEulerCircles) => {
     }
   }, [table]);
 
+  useEffect(() => {
+    resize();
+  }, [props.theme]);
+
   function resize() {
     const canvas: HTMLCanvasElement = document.getElementById(
       "canvas"
@@ -53,7 +57,7 @@ const EulerCircles = (props: IEulerCircles) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="capture_circles">
       <canvas id="canvas" className={styles.drawField} />
     </div>
   );

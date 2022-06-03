@@ -4,37 +4,40 @@ import styles from "./PageHeader.module.css";
 import SymbolButton from "../../UiKit/SymbolButton/SymbolButton";
 import { TruthTable } from "../../Types/TruthTable";
 import { Interpretator } from "../../Helpers/Interpretator";
+import useLocalStorage from "use-local-storage";
 
 interface IPageHeader {
-  onSubmit: (table: TruthTable & {filterValue: any}) => void;
+  onSubmit: (table: TruthTable & { filterValue: any }) => void;
   onFilterValueChange?(filterValue: boolean): void;
 }
 
 const PageHeader = (props: IPageHeader) => {
-  const [inputValue, setValue] = useState("");
+  const [inputValue, setValue] = useLocalStorage("input", "");
   const input = useRef<HTMLInputElement>();
 
-  const leftExpr = inputValue.split('=')[0];
-  const rightExpr = inputValue.split('=')[1] ?? "";
+  const leftExpr = inputValue.split("=")[0];
+  const rightExpr = inputValue.split("=")[1] ?? "";
 
-  useEffect(()=>{    
-      props.onFilterValueChange?.(rightExpr == "1" ? true : rightExpr == "0" ? false : null);
-  }, [rightExpr])
+  useEffect(() => {
+    props.onFilterValueChange?.(
+      rightExpr == "1" ? true : rightExpr == "0" ? false : null
+    );
+  }, [rightExpr]);
 
   const handleClick = (symbol: string) => {
-    const cursor = input.current.selectionStart
+    const cursor = input.current.selectionStart;
     setValue((prevValue) => {
       const leftPart = prevValue.substring(0, cursor);
       const rightPart = prevValue.substring(cursor);
-      return leftPart + symbol + rightPart;      
+      return leftPart + symbol + rightPart;
     });
     input.current!.focus();
   };
 
   const handleSubmit = () => {
     try {
-      const truthTable = Interpretator.getTruthTable(inputValue.toLowerCase());    
-      props.onSubmit({...truthTable, filterValue: true});
+      const truthTable = Interpretator.getTruthTable(inputValue.toLowerCase());
+      props.onSubmit({ ...truthTable, filterValue: true });
     } catch (e: any) {
       alert(e.message);
     }
@@ -45,7 +48,7 @@ const PageHeader = (props: IPageHeader) => {
       handleSubmit();
     }
   };
-  
+
   const clear = () => {
     setValue("");
     input.current!.focus();

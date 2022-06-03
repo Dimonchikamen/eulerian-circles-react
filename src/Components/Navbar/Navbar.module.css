@@ -1,5 +1,5 @@
 .navbar {
-  box-shadow: var(--shadow) 0px 2px 8px;
+  box-shadow: var(--navbar-shadow) 0px 2px 8px;
   background-color: var(--navbar-bg);
   position: fixed;
   top: 0;
@@ -24,6 +24,12 @@
 }
 .navLink:hover {
   color: var(--text-primary);
+}
+
+.dark_mode {
+  font-size: 14px;
+  margin-left: 1rem;
+  text-transform: capitalize;
 }
 .switch {
   margin-left: 5px;
@@ -64,11 +70,11 @@
 }
 
 input:checked + .slider {
-  background-color: #0f3c61;
+  background-color: #a183b2;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #0f3c61;
+  box-shadow: 0 0 1px #a183b2;
 }
 
 input:checked + .slider:before {

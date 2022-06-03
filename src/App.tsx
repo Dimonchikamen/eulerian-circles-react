@@ -39,7 +39,7 @@ function App() {
               element={<EulerCirclesPage theme={theme} />}
             />
             <Route path="/logical_solver" element={<LogicalSolverPage />} />
-            {/* <Route path="*" element={<Navigate to="/euler_circle" />} /> */}
+            <Route path="*" element={<Navigate to="/euler_circle" />} />
           </Routes>
         </div>
       </BrowserRouter>
@@ -47,27 +47,4 @@ function App() {
   );
 }
 
-const styles = {
-  wrapper: css`
-    width: 80%;
-    margin: 0 auto;
-    height: 100vh;
-  `,
-  circles: css`
-    @media (min-width: 1000px) {
-      display: flex;
-      gap: 20px;
-    }
-  `,
-  noCircles: css``,
-  infoHelp: css`
-    font-size: 18px;
-    text-transform: uppercase;
-    margin-top: 1rem;
-    display: inline-block;
-    @media (max-width: 600px) {
-      font-size: 16px;
-    }
-  `,
-};
 export default App;

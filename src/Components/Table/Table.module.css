@@ -8,8 +8,12 @@
   margin-top: 1rem;
 }
 
+.table {
+  color: var(--text-primary);
+}
 .cell {
   text-align: center;
+  color: var(--text-primary) !important;
 }
 
 @media only screen and (max-width: 1000px) {
