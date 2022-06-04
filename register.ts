@@ -4,4 +4,4 @@ tsNode.register({
     files: true,
     transpileOnly: true,
     project: "./tests/tsconfig.json"
-})
+});

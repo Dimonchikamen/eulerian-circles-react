@@ -1,40 +1,41 @@
 .button {
-  position: absolute;
-  top: 10rem;
-  right: 12rem;
-  height: 50px;
-  width: 131px;
-  background-color: var(--accent);
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  cursor: pointer;
+    position: absolute;
+    top: 10rem;
+    right: 12rem;
+    height: 50px;
+    width: 131px;
+    background-color: var(--accent);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .text {
-  font-size: 20px;
-  font-weight: 600;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .img {
-  width: 22px;
-  height: 50px;
-  margin-left: 5px;
-  filter: var(--svg-filter);
+    width: 22px;
+    height: 50px;
+    margin-left: 5px;
+    filter: var(--svg-filter);
 }
 
 @media screen and (max-width: 500px) {
-  .button {
-    position: static;
-    height: 40px;
-    width: 108px;
-    padding: 5px 10px;
-    margin-left: 10px;
-  }
-  .text {
-    font-size: 16px;
-    font-weight: 600;
-  }
+    .button {
+        position: static;
+        height: 40px;
+        width: 108px;
+        padding: 5px 10px;
+        margin-left: 10px;
+    }
+
+    .text {
+        font-size: 16px;
+        font-weight: 600;
+    }
 }

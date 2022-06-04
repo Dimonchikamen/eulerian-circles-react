@@ -1,0 +1,14 @@
+{
+    "extends": [
+        "react-app",
+        "react-app/jest"
+    ],
+    "rules": {
+        "no-console": "warn",
+        "prefer-const": "warn",
+        "indent": ["warn", 4],
+        "max-depth": ["error", 120],
+        "semi": "warn",
+        "no-extra-semi": "error"
+    }
+}

@@ -31,7 +31,7 @@ const LogicalSolverPage: FC<{ theme: string }> = ({ theme }) => {
             const combines = getVariablesCombines(variables);
             const resultcombines: Combine[] = [];
             const results: boolean[] = [];
-            for (let combine of combines) {
+            for (const combine of combines) {
                 const leftPartResult = calculate(leftPartpolishString, combine);
                 const rightPartResult = calculate(rightPartpolishString, combine);
                 if (leftPartResult === rightPartResult) {

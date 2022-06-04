@@ -24,7 +24,7 @@ export function draw(
 
     for (let i = 0; i < width; i += 2) {
         for (let j = 0; j < height; j += 2) {
-            let curPoint: Point = { x: i, y: j };
+            const curPoint: Point = { x: i, y: j };
             body.forEach((row) => {
                 const expressionIsTrue = row[row.length - 1];
                 if (expressionIsTrue) {
@@ -33,7 +33,7 @@ export function draw(
                         const circle = circles[k];
                         subResult =
                             subResult &&
-                            getDistance(circle.center, curPoint) < radius === Boolean(row[k]);
+                            ((getDistance(circle.center, curPoint) < radius) === Boolean(row[k]));
                     }
                     if (subResult) {
                         ctx.lineWidth = lineWidth;
@@ -78,8 +78,8 @@ function drawText(
 }
 
 function getDistance(point1: Point, point2: Point) {
-    let dx = Math.abs(point1.x - point2.x);
-    let dy = Math.abs(point1.y - point2.y);
+    const dx = Math.abs(point1.x - point2.x);
+    const dy = Math.abs(point1.y - point2.y);
     return Math.sqrt(dx * dx + dy * dy);
 }
 

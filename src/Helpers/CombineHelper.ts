@@ -10,16 +10,16 @@ export const getVariablesCombines = (variables: string[]): Combine[] => {
         result.push(combine);
     }
     return result;
-}
+};
 
 const addZeros = (variables: string[], stringCombine: string) => {
     if (stringCombine.length === variables.length) {
         return stringCombine;
     } else {
-        let zeros = getStringZeros(variables.length - stringCombine.length);
+        const zeros = getStringZeros(variables.length - stringCombine.length);
         return zeros + stringCombine;
     }
-}
+};
 
 const getStringZeros = (count: number) => {
     let result = "";
@@ -27,7 +27,7 @@ const getStringZeros = (count: number) => {
         result += "0";
     }
     return result;
-}
+};
 
 const getCombine = (variables: string[], combineString: string): Combine => {
     const result: Combine = {};
@@ -35,10 +35,10 @@ const getCombine = (variables: string[], combineString: string): Combine => {
         result[variables[i]] = Boolean(parseInt(combineString[i]));
     }
     return result;
-}
+};
 
 const getStartStringCombine = (variables: string[]): string => {
     let result = "";
-    variables.forEach(variable => { result += "0" });
+    variables.forEach(variable => { result += "0"; });
     return result;
-}
+};

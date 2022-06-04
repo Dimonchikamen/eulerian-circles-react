@@ -14,8 +14,8 @@ export const operations = new Map([
 
 export const isOperation = (operation: string) => {
     return operations.has(operation as OperationType) as boolean;
-}
+};
 
 export const isUnarOperation = (operation: string) => {
     return unaryOperations.has(operation as OperationType) as boolean;
-}
+};
