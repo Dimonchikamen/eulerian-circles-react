@@ -26,31 +26,38 @@ const EulerCircles = (props: IEulerCircles) => {
             "canvas"
         ) as HTMLCanvasElement;
         const ctx = canvas.getContext("2d")!;
+        let fontSize;
         function resizeCanvas() {
             if (window.innerWidth >= 1300) {
                 canvas.width = window.innerWidth * 0.4;
                 canvas.height = window.innerHeight * 0.65;
+                fontSize = 40;
             } else if (window.innerWidth >= 1000) {
                 canvas.width = window.innerWidth * 0.4;
                 canvas.height = window.innerHeight * 0.65;
+                fontSize = 30;
             } else if (window.innerWidth >= 700) {
                 canvas.width = window.innerWidth * 0.8;
                 canvas.height = window.innerHeight * 0.65;
+                fontSize = 25;
             } else if (window.innerWidth >= 400) {
                 canvas.width = window.innerWidth * 0.8;
                 canvas.height = window.outerHeight * 0.5;
+                fontSize = 20;
             } else {
                 canvas.width = window.innerWidth * 0.82;
                 canvas.height = window.outerHeight * 0.45;
+                fontSize = 15;
             }
             draw(
                 ctx,
                 table,
                 canvas.width,
                 canvas.height,
+                props.theme,
                 3,
                 Math.min(canvas.width, canvas.height) / 4,
-                props.theme
+                fontSize
             );
         }
         resizeCanvas();

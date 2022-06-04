@@ -2,7 +2,7 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
 export const saverToPDF = (theme: string) => {
-    var doc = new jsPDF({
+    const doc = new jsPDF({
         orientation: "l",
         unit: "mm",
         format: "a4",
@@ -14,7 +14,7 @@ export const saverToPDF = (theme: string) => {
         useCORS: true,
         backgroundColor: theme === "light" ? "#ffffff" : "#000000",
     }).then((canvas) => {
-        let imgData = canvas.toDataURL("image/jpeg");
+        const imgData = canvas.toDataURL("image/jpeg");
         doc.addImage(imgData, "PNG", 10, 10, 280, 120);
         doc.save("circles.pdf");
     });

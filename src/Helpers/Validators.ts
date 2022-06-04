@@ -113,7 +113,7 @@ const operationIsValid = (previousSymbol: string | null, nextSymbol: string | nu
 }
 
 const unarOperationIsValid = (previousSymbol: string | null, nextSymbol: string | null) => {
-    const previousSymbolIsValid = previousSymbol ? isOperation(previousSymbol) || isUnarOperation(previousSymbol) || previousSymbol === "(" : true;
+    const previousSymbolIsValid = previousSymbol ? isOperation(previousSymbol) || isUnarOperation(previousSymbol) || previousSymbol === "(" || previousSymbol === "=" : true;
     const nextSymbolIsValid = nextSymbol ? isVariable(nextSymbol) || isConstant(nextSymbol) || nextSymbol === "(" : false;
     return previousSymbolIsValid && nextSymbolIsValid;
 }
