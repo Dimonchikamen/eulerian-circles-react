@@ -23,6 +23,7 @@ code {
     --input-bg: white;
     --navbar-bg: white;
     --svg-filter: filter: invert(0%) sepia(5%) saturate(7479%) hue-rotate(294deg) brightness(94%) contrast(104%);
+    --svg-filter-inverted: invert(100%) sepia(100%) saturate(1%) hue-rotate(29deg) brightness(107%) contrast(101%);
 }
 
 [data-theme="dark"] {
@@ -30,9 +31,10 @@ code {
     --text-primary: rgba(255, 255, 255, 0.79);
     --navbar-shadow: rgba(69, 69, 69, 0.157);
     --text-secondary: rgb(160, 160, 160);
-    --accent: rgb(155, 107, 186);
+    --accent: #9b6bba;
     --input-bg: rgb(32, 32, 32);
     --navbar-bg: #121212;
+    --svg-filter-inverted: filter: invert(0%) sepia(5%) saturate(7479%) hue-rotate(294deg) brightness(94%) contrast(104%);
     --svg-filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(29deg) brightness(107%) contrast(101%);
 }
 

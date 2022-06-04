@@ -1,94 +1,188 @@
 .navbar {
-    box-shadow: var(--navbar-shadow) 0px 2px 8px;
-    background-color: var(--navbar-bg);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
+  box-shadow: var(--navbar-shadow) 0px 2px 8px;
+  background-color: var(--navbar-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
 }
 
 .links {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 60px;
-    margin: 0 2rem 0 2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 60px;
+  margin: 0 2rem 0 2rem;
 }
 
 .navLink {
-    color: var(--text-primary);
-    text-decoration: none;
-    margin-right: 1rem;
-    text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  margin-right: 1rem;
+  text-transform: uppercase;
 }
 
 .navLink:hover {
-    color: var(--text-primary);
+  color: var(--text-primary);
 }
 
+.mobile_menu {
+  display: none;
+}
 .dark_mode {
-    font-size: 14px;
-    margin-left: 1rem;
-    text-transform: capitalize;
+  font-size: 14px;
+  margin-left: 1rem;
+  text-transform: capitalize;
+}
+.dark_mode_container {
+  display: flex;
+  align-items: center;
 }
 
 .switch {
-    margin-left: 5px;
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+  margin-left: 5px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
-input:checked+.slider {
-    background-color: #a183b2;
+input:checked + .slider {
+  background-color: #a183b2;
 }
 
-input:focus+.slider {
-    box-shadow: 0 0 1px #a183b2;
+input:focus + .slider {
+  box-shadow: 0 0 1px #a183b2;
 }
 
-input:checked+.slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
 .slider.round {
-    border-radius: 34px;
+  border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 500px) {
+  .links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    margin: 0 20px 0 20px;
+  }
+  .navLink {
+    display: none;
+  }
+
+  .dark_mode {
+    font-size: 14px;
+    margin-left: 1rem;
+    text-transform: capitalize;
+  }
+  .mobile_menu {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+/* Mobile Nav  */
+.mobile_nav_container {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--navbar-bg);
+}
+
+.mobile_nav {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.right_side {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 2rem;
+}
+.close {
+  margin-bottom: 3rem;
+  cursor: pointer;
+}
+
+.left_side_mobile {
+  width: 90px;
+  background-color: var(--accent);
+}
+.mobile_links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 20px;
+}
+.mobile_link {
+  color: var(--text-primary);
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+.mobile_link:hover {
+  color: var(--text-primary);
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.right_arrow {
+  margin-left: 10px;
+}
+
+.right_arrow_svg {
+  filter: var(--svg-filter-inverted);
+  width: 12px;
 }
