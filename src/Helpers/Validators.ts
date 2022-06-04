@@ -3,57 +3,11 @@ import { ValidateType } from "Types/ValidateType";
 import { isConstant, isVariable } from "./Interpretator";
 
 export const isValidate = (exp: string, type: ValidateType) => {
-    switch (type) {
-        case ValidateType.EULER_CIRCLES:
-            return eulerCircleExpressionIsvalidate(exp);
-        case ValidateType.LOGICAL_SOLVER:
-            return logicalEquationIsValidate(exp);
-        default:
-            return false;
-    }
-}
-
-export const eulerCircleExpressionIsvalidate = (exp: string) => {
     if (exp.length === 0) return false;
-
-    const stack = [];
-    for (let i = 0; i < exp.length; i++) {
-        const symbol = exp[i];
-        const previousSymbol = i === 0 ? null : exp[i - 1];
-        const nextSymbol = i === exp.length - 1 ? null : exp[i + 1];
-
-        if (isOperation(symbol) && !operationIsValid(previousSymbol, nextSymbol)) {
-            return false;
-        }
-
-        if (isUnarOperation(symbol) && !unarOperationIsValid(previousSymbol, nextSymbol)) {
-            return false;
-        }
-
-        if (symbol === "(") {
-            stack.push(symbol);
-        }
-
-        if (symbol === ")") {
-            const top = stack.pop();
-            if (!top) {
-                return false;
-            }
-        }
-
-        if (isVariable(symbol) && !variableIsValid(previousSymbol, nextSymbol)) {
-            return false;
-        }
+    if ((type === ValidateType.LOGICAL_SOLVER && exp.indexOf("=") === -1) ||
+        (type === ValidateType.EULER_CIRCLES && exp.indexOf("=") !== -1)) {
+        return false
     }
-    if (stack.length !== 0) {
-        return false;
-    }
-    return true;
-}
-
-export const logicalEquationIsValidate = (exp: string) => {
-    if (exp.length === 0) return false;
-    if (exp.indexOf("=") === -1) return false;
 
     const stack = [];
     for (let i = 0; i < exp.length; i++) {
@@ -101,8 +55,8 @@ const equalSymbolIsValid = (previousSymbol: string | null, nextSymbol: string | 
 }
 
 const variableIsValid = (previousSymbol: string | null, nextSymbol: string | null) => {
-    const previousSymbolIsValid = previousSymbol ? !isVariable(previousSymbol) && !isConstant(previousSymbol) : true;
-    const nextSymbolIsValid = nextSymbol ? !isVariable(nextSymbol) && !isConstant(nextSymbol) && !isUnarOperation(nextSymbol) : true;
+    const previousSymbolIsValid = previousSymbol ? isUnarOperation(previousSymbol) || isOperation(previousSymbol) || previousSymbol === "(" || previousSymbol === "=" : true;
+    const nextSymbolIsValid = nextSymbol ? isUnarOperation(nextSymbol) || isOperation(nextSymbol) || nextSymbol === ")" || nextSymbol === "=" : true;
     return previousSymbolIsValid && nextSymbolIsValid;
 }
 

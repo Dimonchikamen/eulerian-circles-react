@@ -1,111 +1,119 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .header {
-  box-sizing: border-box;
-  display: flex;
-  gap: 10px;
-  justify-content: left;
-  flex-wrap: wrap;
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+    justify-content: left;
+    flex-wrap: wrap;
 }
 
 .headerTitle {
-  text-align: right;
-  padding-top: 1rem;
-  font-size: 28px;
+    text-align: right;
+    padding-top: 1rem;
+    font-size: 28px;
 }
 
 .instruction {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .inputContainer {
-  align-items: center;
-  display: flex;
-  justify-content: left;
-  height: 4rem;
-  width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: left;
+    height: 4rem;
+    width: 100%;
 }
 
 .input {
-  border-radius: 5px;
-  border: 1px solid rgb(165, 165, 165);
-  font-size: 1.2rem;
-  height: 3rem;
-  padding: 25px;
-  width: 100%;
-  background-color: var(--input-bg);
-  color: var(--text-primary);
+    border-radius: 5px;
+    border: 1px solid rgb(165, 165, 165);
+    font-size: 1.2rem;
+    height: 3rem;
+    padding: 25px;
+    width: 100%;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
 }
+
 .input::placeholder {
-  font-style: italic;
+    font-style: italic;
 }
+
 .input:focus {
-  outline: none !important;
-  border: 1px solid rgb(84, 84, 84);
+    outline: none !important;
+    border: 1px solid rgb(84, 84, 84);
 }
 
 .enterButtonContainer {
-  text-align: right;
-  margin-left: 1rem;
-  padding: 25px 0 25px 25px;
+    text-align: right;
+    margin-left: 1rem;
+    padding: 25px 0 25px 25px;
 }
 
 .enterButton {
-  font-size: 18px;
-  border-radius: 5px;
-  padding: 11.5px 30px;
-  background-color: transparent;
-  border: 1px solid grey;
-  transition: all 0.4s;
-  color: var(--text-primary);
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 11.5px 30px;
+    background-color: transparent;
+    border: 1px solid grey;
+    transition: all 0.4s;
+    color: var(--text-primary);
 }
 
 .enterButton:hover {
-  background-color: var(--accent);
+    background-color: var(--accent);
 }
 
 .clearButton {
-  background-color: transparent;
-  border: none;
-  color: grey !important;
+    background-color: transparent;
+    border: none;
+    color: grey !important;
 }
 
 @media only screen and (max-width: 1000px) {
-  .enterButtonContainer {
-    margin-left: 0;
-  }
+    .enterButtonContainer {
+        margin-left: 0;
+    }
 }
 
 @media only screen and (max-width: 600px) {
-  .inputContainer {
-    flex-wrap: wrap;
-    height: 6rem;
-  }
-  .enterButtonContainer {
-    margin-left: 0;
-    padding: 0;
-    margin-block: 10px;
-  }
-  .enterButton {
-    font-size: 16px;
-    padding: 7px 22px;
-  }
-  .container {
-    margin-bottom: 1rem;
-  }
-  .headerTitle {
-    margin-bottom: 1rem;
-  }
-  .headerTitle {
-    text-align: center;
-    padding-top: 1.5rem;
-    font-size: 24px;
-  }
-  .instruction {
-    font-size: 16px;
-  }
+    .inputContainer {
+        flex-wrap: wrap;
+        height: 6rem;
+    }
+
+    .enterButtonContainer {
+        margin-left: 0;
+        padding: 0;
+        margin-block: 10px;
+    }
+
+    .enterButton {
+        font-size: 16px;
+        padding: 7px 22px;
+    }
+
+    .container {
+        margin-bottom: 1rem;
+    }
+
+    .headerTitle {
+        margin-bottom: 1rem;
+    }
+
+    .headerTitle {
+        text-align: center;
+        padding-top: 1.5rem;
+        font-size: 24px;
+    }
+
+    .instruction {
+        font-size: 16px;
+    }
 }
