@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/Eulerian_Circles/static/css/main.7002aaed.css",
-    "main.js": "/Eulerian_Circles/static/js/main.060da7fc.js",
-    "static/js/703.fc10767a.chunk.js": "/Eulerian_Circles/static/js/703.fc10767a.chunk.js",
-    "static/js/628.c0849249.chunk.js": "/Eulerian_Circles/static/js/628.c0849249.chunk.js",
-    "static/js/787.681333b9.chunk.js": "/Eulerian_Circles/static/js/787.681333b9.chunk.js",
-    "static/media/info.svg": "/Eulerian_Circles/static/media/info.6ac4a752c1a6de64138a0ca183a14890.svg",
-    "index.html": "/Eulerian_Circles/index.html",
-    "static/media/download.svg": "/Eulerian_Circles/static/media/download.963380eba224731b2c7c8975b418d0b3.svg",
-    "static/media/close.svg": "/Eulerian_Circles/static/media/close.dd98fcd5bc395be9218346106e84735c.svg",
-    "static/media/menu.svg": "/Eulerian_Circles/static/media/menu.3d5fb723e8f833a017d2b26d7cfe803a.svg",
-    "static/media/rightArrow.svg": "/Eulerian_Circles/static/media/rightArrow.ae3d7eb611112261b7d8844e242dcfbc.svg",
-    "main.7002aaed.css.map": "/Eulerian_Circles/static/css/main.7002aaed.css.map",
-    "main.060da7fc.js.map": "/Eulerian_Circles/static/js/main.060da7fc.js.map",
-    "703.fc10767a.chunk.js.map": "/Eulerian_Circles/static/js/703.fc10767a.chunk.js.map",
-    "628.c0849249.chunk.js.map": "/Eulerian_Circles/static/js/628.c0849249.chunk.js.map",
-    "787.681333b9.chunk.js.map": "/Eulerian_Circles/static/js/787.681333b9.chunk.js.map"
+    "main.css": "/eulerian-circles-react/static/css/main.7002aaed.css",
+    "main.js": "/eulerian-circles-react/static/js/main.e99cf715.js",
+    "static/js/703.fc10767a.chunk.js": "/eulerian-circles-react/static/js/703.fc10767a.chunk.js",
+    "static/js/628.c0849249.chunk.js": "/eulerian-circles-react/static/js/628.c0849249.chunk.js",
+    "static/js/787.681333b9.chunk.js": "/eulerian-circles-react/static/js/787.681333b9.chunk.js",
+    "static/media/info.svg": "/eulerian-circles-react/static/media/info.6ac4a752c1a6de64138a0ca183a14890.svg",
+    "index.html": "/eulerian-circles-react/index.html",
+    "static/media/download.svg": "/eulerian-circles-react/static/media/download.963380eba224731b2c7c8975b418d0b3.svg",
+    "static/media/close.svg": "/eulerian-circles-react/static/media/close.dd98fcd5bc395be9218346106e84735c.svg",
+    "static/media/menu.svg": "/eulerian-circles-react/static/media/menu.3d5fb723e8f833a017d2b26d7cfe803a.svg",
+    "static/media/rightArrow.svg": "/eulerian-circles-react/static/media/rightArrow.ae3d7eb611112261b7d8844e242dcfbc.svg",
+    "main.7002aaed.css.map": "/eulerian-circles-react/static/css/main.7002aaed.css.map",
+    "main.e99cf715.js.map": "/eulerian-circles-react/static/js/main.e99cf715.js.map",
+    "703.fc10767a.chunk.js.map": "/eulerian-circles-react/static/js/703.fc10767a.chunk.js.map",
+    "628.c0849249.chunk.js.map": "/eulerian-circles-react/static/js/628.c0849249.chunk.js.map",
+    "787.681333b9.chunk.js.map": "/eulerian-circles-react/static/js/787.681333b9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7002aaed.css",
-    "static/js/main.060da7fc.js"
+    "static/js/main.e99cf715.js"
   ]
 }
