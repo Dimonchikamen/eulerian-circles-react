@@ -1,6 +1,6 @@
 {
   "name": "eulerian_circles",
-  "homepage": "https://dimonchikamen.github.io/Eulerian_Circles",
+  "homepage": "https://dimonchikamen.github.io/eulerian-circles-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
