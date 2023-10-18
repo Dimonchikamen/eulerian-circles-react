@@ -21,6 +21,7 @@
     text-decoration: none;
     margin-right: 1rem;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .navLink:hover {
@@ -176,6 +177,7 @@ input:checked+.slider:before {
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
 .mobile_link:hover {

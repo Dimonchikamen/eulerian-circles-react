@@ -1,22 +1,35 @@
 import s from "./Navbar.module.css";
-import { Link } from "react-router-dom";
 import menu_img from "../../static/images/menu.svg";
 import close from "../../static/images/close.svg";
 import rightArrow from "../../static/images/rightArrow.svg";
-import { useState } from "react";
+import { useCallback, useContext, useState } from "react";
+import { TabContext } from "providers/TabProvider/TabContext";
 
 const Navbar = ({ switchTheme, theme }: any) => {
     const [showMobileNav, setShowMobileNav] = useState(false);
+    const { setTab } = useContext(TabContext);
+
+    const changeTab = useCallback((tab: number) => {
+        return () => setTab(tab);
+    }, [setTab]);
+
+    const mobileClickHandler = useCallback((tab: number) => {
+        return () => {
+            setTab(tab)
+            setShowMobileNav(false);
+        }
+    },[]);
+
     return (
         <>
             <div className={s.navbar}>
                 <ul className={s.links}>
-                    <Link to="/Eulerian_Circles" className={s.navLink}>
+                    <div className={s.navLink} onClick={changeTab(0)}>
                         Эйлеровые круги
-                    </Link>
-                    <Link to="/Logical_Solver" className={s.navLink}>
+                    </div>
+                    <div className={s.navLink} onClick={changeTab(1)}>
                         Логический решатель
-                    </Link>
+                    </div>
                     <div className={s.mobile_menu} onClick={() => setShowMobileNav(true)}>
                         <img src={menu_img} alt="" />
                     </div>
@@ -42,10 +55,9 @@ const Navbar = ({ switchTheme, theme }: any) => {
                                 <img src={close} alt="" className={s.right_arrow_svg} />
                             </div>
                             <ul className={s.mobile_links}>
-                                <Link
-                                    to="/Eulerian_Circles"
+                                <div
                                     className={s.mobile_link}
-                                    onClick={() => setShowMobileNav(false)}
+                                    onClick={mobileClickHandler(0)}
                                 >
                                     Эйлеровые круги
                                     <div className={s.right_arrow}>
@@ -55,11 +67,10 @@ const Navbar = ({ switchTheme, theme }: any) => {
                                             className={s.right_arrow_svg}
                                         />
                                     </div>
-                                </Link>
-                                <Link
-                                    to="/Logical_Solver"
+                                </div>
+                                <div
                                     className={s.mobile_link}
-                                    onClick={() => setShowMobileNav(false)}
+                                    onClick={mobileClickHandler(1)}
                                 >
                                     Логический решатель
                                     <div className={s.right_arrow}>
@@ -69,7 +80,7 @@ const Navbar = ({ switchTheme, theme }: any) => {
                                             className={s.right_arrow_svg}
                                         />
                                     </div>
-                                </Link>
+                                </div>
                             </ul>
                         </div>
                     </div>

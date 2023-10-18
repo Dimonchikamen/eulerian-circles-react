@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { TabProvider } from 'providers/TabProvider/TabProvider';
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <TabProvider>
+            <App />
+        </TabProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

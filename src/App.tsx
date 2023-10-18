@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import useLocalStorage from "use-local-storage";
 import { EulerCirclesPage } from "Components/EulerCirclesPage/EulerCirclesPage";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LogicalSolverPage from "Components/LogicalSolverPage/LogicalSolverPage";
 import s from "./App.module.css";
 import Navbar from "Components/Navbar/Navbar";
+import { TabContent} from "react-bootstrap";
+import TabPane from "react-bootstrap/esm/TabPane";
+import TabContainer from "react-bootstrap/esm/TabContainer";
+import { TabContext } from "providers/TabProvider/TabContext";
 
 function App() {
     const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -11,6 +15,7 @@ function App() {
         "theme",
         defaultDark ? "dark" : "light"
     );
+    const {tab} = useContext(TabContext);
 
     const switchTheme = (theme: string) => {
         const newTheme = theme === "light" ? "dark" : "light";
@@ -19,18 +24,19 @@ function App() {
 
     return (
         <div className={s.app} data-theme={theme}>
-            <BrowserRouter>
-                <Navbar switchTheme={switchTheme} theme={theme} />
-                <div className={s.content}>
-                    <Routes>
-                        <Route path="/eulerian-circles-react">
-                            <Route path="/Eulerian_Circles" element={<EulerCirclesPage theme={theme} />} />
-                            <Route path="/Logical_Solver" element={<LogicalSolverPage theme={theme} />} />
-                            <Route path="*" element={<Navigate to="/Eulerian_Circles" />} />
-                        </Route>
-                    </Routes>
-                </div>
-            </BrowserRouter>
+            <Navbar switchTheme={switchTheme} theme={theme} />
+            <div className={s.content}>
+                <TabContainer defaultActiveKey={0} activeKey={tab}>
+                    <TabContent>
+                        <TabPane title={"Эйлеровые круги"} eventKey={0}>
+                            <EulerCirclesPage theme={theme} />
+                        </TabPane>
+                        <TabPane title={"Логический решатель"} eventKey={1}>
+                            <LogicalSolverPage theme={theme} />
+                        </TabPane>
+                    </TabContent>
+                </TabContainer>
+            </div>
         </div>
     );
 }
