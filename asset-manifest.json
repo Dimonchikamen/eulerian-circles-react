@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/eulerian-circles-react/static/css/main.7002aaed.css",
-    "main.js": "/eulerian-circles-react/static/js/main.6eb82f0c.js",
+    "main.js": "/eulerian-circles-react/static/js/main.f14f3068.js",
     "static/js/703.e232dca2.chunk.js": "/eulerian-circles-react/static/js/703.e232dca2.chunk.js",
     "static/js/628.3c2f1275.chunk.js": "/eulerian-circles-react/static/js/628.3c2f1275.chunk.js",
     "static/js/787.1637ade5.chunk.js": "/eulerian-circles-react/static/js/787.1637ade5.chunk.js",
@@ -12,13 +12,13 @@
     "static/media/menu.svg": "/eulerian-circles-react/static/media/menu.3d5fb723e8f833a017d2b26d7cfe803a.svg",
     "static/media/rightArrow.svg": "/eulerian-circles-react/static/media/rightArrow.ae3d7eb611112261b7d8844e242dcfbc.svg",
     "main.7002aaed.css.map": "/eulerian-circles-react/static/css/main.7002aaed.css.map",
-    "main.6eb82f0c.js.map": "/eulerian-circles-react/static/js/main.6eb82f0c.js.map",
+    "main.f14f3068.js.map": "/eulerian-circles-react/static/js/main.f14f3068.js.map",
     "703.e232dca2.chunk.js.map": "/eulerian-circles-react/static/js/703.e232dca2.chunk.js.map",
     "628.3c2f1275.chunk.js.map": "/eulerian-circles-react/static/js/628.3c2f1275.chunk.js.map",
     "787.1637ade5.chunk.js.map": "/eulerian-circles-react/static/js/787.1637ade5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7002aaed.css",
-    "static/js/main.6eb82f0c.js"
+    "static/js/main.f14f3068.js"
   ]
 }
