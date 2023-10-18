@@ -1,6 +1,6 @@
 # Eulerian Circles App
 
-[https://dimonchikamen.github.io/Eulerian_Circles/](https://dimonchikamen.github.io/Eulerian_Circles/)
+[https://dimonchikamen.github.io/eulerian-circles-react/](https://dimonchikamen.github.io/eulerian-circles-react/)
 
 ## Available Scripts
 
