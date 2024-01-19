@@ -138,11 +138,11 @@ const isPriorityThen = (top: string, current: string) => {
         return current === OperationType.EQUALITY;
     case OperationType.IMPLICATION:
         return current === OperationType.IMPLICATION;
-    case OperationType.OR || OperationType.XOR:
-        return current === OperationType.OR || current === OperationType.XOR;
-    case OperationType.AND:
+    case OperationType.OR || OperationType.OR_PLUS || OperationType.XOR:
+        return current === OperationType.OR || current === OperationType.OR_PLUS || current === OperationType.XOR;
+    case OperationType.AND || OperationType.AND_MULTI:
         return current !== OperationType.NOT;
-    case OperationType.NOT:
+    case OperationType.NOT || OperationType.NOT_EXL:
         return true;
     default:
         return false;

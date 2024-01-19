@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from "react";
+import React, { type FC, useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { OperationType } from "../../Shared/OrepationType";
 import styles from "./ExpressionInput.module.css";
 import SymbolButton from "../../UiKit/SymbolButton/SymbolButton";
@@ -12,21 +12,35 @@ interface IExpressionInput {
 
 const ExpressionInput: FC<IExpressionInput> = ({ title, onSubmit, theme }) => {
     const [inputValue, setValue] = useState("");
-    const input = useRef<HTMLInputElement>();
+    const [cursorPosition, setCursorPosition] = useState(0);
+    const inputRef = useRef<HTMLInputElement>();
 
-    const InsertSymbol = (symbol: string) => {
-        const cursor = input.current.selectionStart;
+    useEffect(() => {
+        inputRef.current.selectionStart = cursorPosition;
+        inputRef.current.selectionEnd = cursorPosition;
+        inputRef.current.focus();
+    }, [inputValue, cursorPosition]);
+
+    const insertSymbol = useCallback((symbol: string) => {
+        const cursor = inputRef.current.selectionStart;
         setValue((prevValue) => {
             const leftPart = prevValue.substring(0, cursor);
             const rightPart = prevValue.substring(cursor);
             return leftPart + symbol + rightPart;
         });
-        input.current!.focus();
-    };
+        setCursorPosition(cursor + 1);
+        inputRef.current?.focus();
+    }, []);
 
     const handleSubmit = () => {
-        onSubmit(inputValue.toLowerCase());
+        const result = inputValue.replace(/[ ]/g, "");
+        onSubmit(result.toLowerCase());
     };
+
+    const handleChangeValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setCursorPosition(e.target.selectionStart);
+        setValue(e.target.value);
+    }, []);
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.code === "Enter") {
@@ -34,37 +48,41 @@ const ExpressionInput: FC<IExpressionInput> = ({ title, onSubmit, theme }) => {
         }
     };
 
-    const clearInput = () => {
+    const clearInput = useCallback(() => {
         setValue("");
-        input.current!.focus();
-    };
+        inputRef.current?.focus();
+    }, []);
+
+    const actionButtons = useMemo(() => (
+        <div className={styles.header}>
+            <SymbolButton onClick={insertSymbol} title={OperationType.NOT} />
+            <SymbolButton onClick={insertSymbol} title={OperationType.OR} />
+            <SymbolButton onClick={insertSymbol} title={OperationType.AND} />
+            <SymbolButton
+                onClick={insertSymbol}
+                title={OperationType.IMPLICATION}
+            />
+            <SymbolButton onClick={insertSymbol} title={OperationType.EQUALITY} />
+            <SymbolButton onClick={insertSymbol} title={OperationType.XOR} />
+            <SymbolButton onClick={insertSymbol} title="(" />
+            <SymbolButton onClick={insertSymbol} title=")" />
+        </div>
+    ), [insertSymbol]);
 
     return (
         <div className={styles.container}>
             <div className={styles.headerTitle}>{title}</div>
             <div className={styles.instruction}>ВВЕДИТЕ ВЫРАЖЕНИЕ</div>
-            <div className={styles.header}>
-                <SymbolButton onClick={InsertSymbol} title={OperationType.NOT} />
-                <SymbolButton onClick={InsertSymbol} title={OperationType.OR} />
-                <SymbolButton onClick={InsertSymbol} title={OperationType.AND} />
-                <SymbolButton
-                    onClick={InsertSymbol}
-                    title={OperationType.IMPLICATION}
-                />
-                <SymbolButton onClick={InsertSymbol} title={OperationType.EQUALITY} />
-                <SymbolButton onClick={InsertSymbol} title={OperationType.XOR} />
-                <SymbolButton onClick={InsertSymbol} title="(" />
-                <SymbolButton onClick={InsertSymbol} title=")" />
-            </div>
+            {actionButtons}
             <div className={styles.inputContainer}>
                 <div style={{ width: "100%" }}>
                     <input
                         id="input"
                         className={styles.input}
-                        ref={input}
+                        ref={inputRef}
                         value={inputValue}
                         onKeyDown={handleKeyDown}
-                        onChange={(e) => setValue(e.target.value)}
+                        onChange={handleChangeValue}
                         autoFocus
                         placeholder="A v B"
                         style={{ paddingRight: "44px" }}

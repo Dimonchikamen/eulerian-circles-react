@@ -9,8 +9,6 @@ interface ITable {
 }
 
 const TableConstructor: React.FC<ITable> = ({ title, headers, data, isLogicalSolver }) => {
-    console.log(headers);
-    console.log(data);
     const filterColumns = (h: any, i: number, t: any[]) => !isLogicalSolver || (isLogicalSolver && i !== t.length - 1);
 
     return (
@@ -20,7 +18,6 @@ const TableConstructor: React.FC<ITable> = ({ title, headers, data, isLogicalSol
                 <thead>
                     <tr>
                         {headers.filter(filterColumns).map((header, index) => {
-                            console.log(header);
                             return (
                                 <th key={`header-${index}`} className={styles.cell}>
                                     {header}

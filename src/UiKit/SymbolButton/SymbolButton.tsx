@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./SymbolButton.module.css";
 
 interface ISymbolButton {
@@ -18,4 +19,4 @@ const SymbolButton = (props: ISymbolButton) => {
     );
 };
 
-export default SymbolButton;
+export default memo(SymbolButton);
