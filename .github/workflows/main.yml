@@ -1,0 +1,24 @@
+name: building
+run-name: ${{ github.actor }} runs building
+on:
+  push:
+    branches: [main, ci-concurrently]
+  pull_request:
+    branches: [main, ci-concurrently]
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [17.x, 18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Starting node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install modules
+        run: npm ci
+      - name: build
+        run: npm run build
