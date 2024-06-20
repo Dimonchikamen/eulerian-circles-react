@@ -36,8 +36,8 @@ export function EulerCirclesPage({ theme }: { theme: string }) {
                 {table &&
                     table.variables.length > 0 &&
                     table.variables.length <= 4 && (
-                        <EulerCircles table={table} theme={theme} />
-                    )}
+                    <EulerCircles table={table} theme={theme} />
+                )}
                 {table && (
                     <>
                         <TableConstructor

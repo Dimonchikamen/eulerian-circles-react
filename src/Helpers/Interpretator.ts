@@ -144,21 +144,21 @@ export const getVariables = (exp: string) => {
 
 const isPriorityThen = (top: string, current: string) => {
     switch (top) {
-        case OperationType.EQUALITY:
-            return current === OperationType.EQUALITY;
-        case OperationType.IMPLICATION:
-            return current === OperationType.IMPLICATION;
-        case OperationType.OR || OperationType.OR_PLUS || OperationType.XOR:
-            return (
-                current === OperationType.OR ||
+    case OperationType.EQUALITY:
+        return current === OperationType.EQUALITY;
+    case OperationType.IMPLICATION:
+        return current === OperationType.IMPLICATION;
+    case OperationType.OR || OperationType.OR_PLUS || OperationType.XOR:
+        return (
+            current === OperationType.OR ||
                 current === OperationType.OR_PLUS ||
                 current === OperationType.XOR
-            );
-        case OperationType.AND || OperationType.AND_MULTI:
-            return current !== OperationType.NOT;
-        case OperationType.NOT || OperationType.NOT_EXL:
-            return true;
-        default:
-            return false;
+        );
+    case OperationType.AND || OperationType.AND_MULTI:
+        return current !== OperationType.NOT;
+    case OperationType.NOT || OperationType.NOT_EXL:
+        return true;
+    default:
+        return false;
     }
 };

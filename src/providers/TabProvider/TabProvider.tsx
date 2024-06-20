@@ -14,4 +14,4 @@ export const TabProvider: FC<ITabProviderProps> = ({ defaultState = 0, children 
     }), [tab]);
 
     return <TabContext.Provider value={defaultProps}>{children}</TabContext.Provider>;
-}
+};

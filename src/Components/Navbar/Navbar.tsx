@@ -15,9 +15,9 @@ const Navbar = ({ switchTheme, theme }: any) => {
 
     const mobileClickHandler = useCallback((tab: number) => {
         return () => {
-            setTab(tab)
+            setTab(tab);
             setShowMobileNav(false);
-        }
+        };
     },[]);
 
     return (
