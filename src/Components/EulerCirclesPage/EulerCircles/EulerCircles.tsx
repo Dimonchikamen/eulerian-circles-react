@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { draw } from "Helpers/Drawer";
-import { TruthTable } from "Types/TruthTable";
-import styles from "./EulerCircles.module.css";
+import { useEffect } from 'react';
+import { draw } from 'Helpers/Drawer';
+import { TruthTable } from 'Types/TruthTable';
+import styles from './EulerCircles.module.css';
 
 interface IEulerCircles {
     table: TruthTable;
@@ -23,9 +23,9 @@ const EulerCircles = (props: IEulerCircles) => {
 
     function resize() {
         const canvas: HTMLCanvasElement = document.getElementById(
-            "canvas"
+            'canvas'
         ) as HTMLCanvasElement;
-        const ctx = canvas.getContext("2d")!;
+        const ctx = canvas.getContext('2d')!;
         let fontSize;
         function resizeCanvas() {
             if (window.innerWidth >= 1300) {

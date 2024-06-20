@@ -1,14 +1,19 @@
-import { isOperation, isUnarOperation, operations, unaryOperations } from "Shared/Operations";
-import { ValidateType } from "Types/ValidateType";
-import { OperationType } from "../Shared/OrepationType";
-import { Combine } from "../Types/Combine";
-import { createTruthTable } from "../Types/TruthTable";
-import { getVariablesCombines } from "./CombineHelper";
-import { isValidate } from "./Validators";
+import {
+    isOperation,
+    isUnarOperation,
+    operations,
+    unaryOperations,
+} from 'Shared/Operations';
+import { ValidateType } from 'Types/ValidateType';
+import { OperationType } from '../Shared/OrepationType';
+import { Combine } from '../Types/Combine';
+import { createTruthTable } from '../Types/TruthTable';
+import { getVariablesCombines } from './CombineHelper';
+import { isValidate } from './Validators';
 
 export const getTruthTable = (exp: string, type: ValidateType) => {
     if (!isValidate(exp, type)) {
-        throw Error("Выражение составлено неверно");
+        throw Error('Выражение составлено неверно');
     }
     const variables = getVariables(exp);
     const polishString = convertToPolishNotation(exp);
@@ -36,18 +41,18 @@ export const convertToPolishNotation = (exp: string) => {
             stack.push(currSymbol);
         }
 
-        if (currSymbol === "(") {
+        if (currSymbol === '(') {
             stack.push(currSymbol);
         }
 
-        if (currSymbol === ")") {
+        if (currSymbol === ')') {
             while (true) {
                 const nexChar = stack.pop();
                 if (!nexChar) {
-                    throw Error("Неверное выражение");
+                    throw Error('Неверное выражение');
                 }
 
-                if (nexChar === "(") {
+                if (nexChar === '(') {
                     break;
                 }
                 result.push(nexChar);
@@ -61,7 +66,8 @@ export const convertToPolishNotation = (exp: string) => {
         if (isOperation(currSymbol)) {
             while (stack.length > 0) {
                 const top = stack[stack.length - 1];
-                if (!(isUnarOperation(top) || isPriorityThen(top, currSymbol))) break;
+                if (!(isUnarOperation(top) || isPriorityThen(top, currSymbol)))
+                    break;
 
                 result.push(top);
                 stack.pop();
@@ -74,15 +80,14 @@ export const convertToPolishNotation = (exp: string) => {
         result.push(stack.pop()!);
     }
 
-    return result.join("");
+    return result.join('');
 };
 
 export const calculate = (polishString: string, combine: Combine) => {
     const stack: boolean[] = [];
     for (const symbol of polishString) {
-
         if (isConstant(symbol)) {
-            if (symbol === "0") {
+            if (symbol === '0') {
                 stack.push(false);
             } else {
                 stack.push(true);
@@ -95,25 +100,30 @@ export const calculate = (polishString: string, combine: Combine) => {
 
         if (isUnarOperation(symbol)) {
             const top = stack.pop();
-            const operationResult = unaryOperations.get(symbol as OperationType)!(top!);
+            const operationResult = unaryOperations.get(
+                symbol as OperationType
+            )!(top!);
             stack.push(operationResult);
         }
 
         if (isOperation(symbol)) {
             const second = stack.pop();
             const first = stack.pop();
-            const operationResult = operations.get(symbol as OperationType)!(first!, second!);
+            const operationResult = operations.get(symbol as OperationType)!(
+                first!,
+                second!
+            );
             stack.push(operationResult);
         }
     }
     return stack.pop();
 };
 
-export const isConstant = (symbol: string) => symbol === "1" || symbol === "0";
+export const isConstant = (symbol: string) => symbol === '1' || symbol === '0';
 
 export const isVariable = (symbol: string | null) => {
     if (!symbol) return false;
-    const str = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz";
+    const str = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz';
     for (let i = 0; i < str.length; i++) {
         if (str[i] === symbol) {
             return true;
@@ -134,17 +144,21 @@ export const getVariables = (exp: string) => {
 
 const isPriorityThen = (top: string, current: string) => {
     switch (top) {
-    case OperationType.EQUALITY:
-        return current === OperationType.EQUALITY;
-    case OperationType.IMPLICATION:
-        return current === OperationType.IMPLICATION;
-    case OperationType.OR || OperationType.OR_PLUS || OperationType.XOR:
-        return current === OperationType.OR || current === OperationType.OR_PLUS || current === OperationType.XOR;
-    case OperationType.AND || OperationType.AND_MULTI:
-        return current !== OperationType.NOT;
-    case OperationType.NOT || OperationType.NOT_EXL:
-        return true;
-    default:
-        return false;
+        case OperationType.EQUALITY:
+            return current === OperationType.EQUALITY;
+        case OperationType.IMPLICATION:
+            return current === OperationType.IMPLICATION;
+        case OperationType.OR || OperationType.OR_PLUS || OperationType.XOR:
+            return (
+                current === OperationType.OR ||
+                current === OperationType.OR_PLUS ||
+                current === OperationType.XOR
+            );
+        case OperationType.AND || OperationType.AND_MULTI:
+            return current !== OperationType.NOT;
+        case OperationType.NOT || OperationType.NOT_EXL:
+            return true;
+        default:
+            return false;
     }
 };

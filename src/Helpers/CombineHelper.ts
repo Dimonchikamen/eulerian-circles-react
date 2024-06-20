@@ -1,4 +1,4 @@
-import { Combine } from "Types/Combine";
+import { Combine } from 'Types/Combine';
 
 export const getVariablesCombines = (variables: string[]): Combine[] => {
     const result: Combine[] = [];
@@ -22,9 +22,9 @@ const addZeros = (variables: string[], stringCombine: string) => {
 };
 
 const getStringZeros = (count: number) => {
-    let result = "";
+    let result = '';
     for (let i = 0; i < count; i++) {
-        result += "0";
+        result += '0';
     }
     return result;
 };
@@ -38,7 +38,9 @@ const getCombine = (variables: string[], combineString: string): Combine => {
 };
 
 const getStartStringCombine = (variables: string[]): string => {
-    let result = "";
-    variables.forEach(variable => { result += "0"; });
+    let result = '';
+    variables.forEach((variable) => {
+        result += '0';
+    });
     return result;
 };
