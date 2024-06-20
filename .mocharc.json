@@ -1,4 +1,4 @@
 {
-    "require": "./register.js",
+    "require": "./register.ts",
     "reporter": "list"
 }
