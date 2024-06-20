@@ -1,5 +1,5 @@
 .navbar {
-    box-shadow: var(--navbar-shadow) 0px 2px 8px;
+    box-shadow: var(--navbar-shadow) 0 2px 8px;
     background-color: var(--navbar-bg);
     position: fixed;
     top: 0;
@@ -13,7 +13,7 @@
     justify-content: flex-end;
     align-items: center;
     height: 60px;
-    margin: 0 2rem 0 2rem;
+    margin: 0 2rem;
 }
 
 .navLink {
@@ -60,16 +60,13 @@
 .slider {
     position: absolute;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: #ccc;
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
 
-.slider:before {
+.slider::before {
     position: absolute;
     content: "";
     height: 26px;
@@ -89,7 +86,7 @@ input:focus+.slider {
     box-shadow: 0 0 1px #a183b2;
 }
 
-input:checked+.slider:before {
+input:checked+.slider::before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
@@ -99,17 +96,17 @@ input:checked+.slider:before {
     border-radius: 34px;
 }
 
-.slider.round:before {
+.slider.round::before {
     border-radius: 50%;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (width <= 500px) {
     .links {
         display: flex;
         justify-content: space-between;
         align-items: center;
         height: 60px;
-        margin: 0 20px 0 20px;
+        margin: 0 20px;
     }
 
     .navLink {

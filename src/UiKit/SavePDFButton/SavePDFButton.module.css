@@ -25,7 +25,7 @@
     filter: var(--svg-filter);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (width <= 500px) {
     .button {
         position: static;
         height: 40px;

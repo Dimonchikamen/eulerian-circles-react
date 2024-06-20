@@ -1,0 +1,9 @@
+{
+    "extends": "stylelint-config-standard",
+    "rules": {
+        "block-no-empty": null,
+        "selector-class-pattern": null,
+        "keyframes-name-pattern": null,
+        "property-no-vendor-prefix": null
+    }
+}

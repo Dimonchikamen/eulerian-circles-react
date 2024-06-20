@@ -1,8 +1,10 @@
 .container {
     /* border: 1px solid gray; */
+
     /* border-radius: 10px; */
     display: inline-block;
     min-height: 50px;
+
     /* padding: 3px; */
     min-width: 50px;
 }
@@ -24,13 +26,14 @@
     background-color: var(--accent);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (width <= 600px) {
     .button {
         font-size: 18px;
     }
 
     .container {
         min-height: 40px;
+
         /* padding: 3px; */
         min-width: 40px;
     }
