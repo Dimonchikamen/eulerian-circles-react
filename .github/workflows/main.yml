@@ -6,9 +6,8 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  pipeline:
+  lint:
     runs-on: ubuntu-latest
-    environment: ci-ci-yandex
     strategy:
       matrix:
         node-version: [17.x, 18.x]
@@ -19,21 +18,36 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: install modules
         run: npm ci
+
       - name: lint
         run: npm run lint
+
       - name: stylelint
         run: npm run stylelint
+
       - name: tsc
         run: npm run tsc
+
       - name: tests
         run: npm run test
+
       - name: build
         run: npm run build
+
+  docker:
+    needs: lint
+    runs-on: ubuntu-latest
+    environment: ci-ci-yandex
+  
+    steps: 
       - name: login docker
         run: docker login --username ${{ secrets.DOCKER_HUB_LOGIN }} --password ${{ secrets.DOCKER_HUB_PASS }}
+
       - name: build docker
         run: docker build -t dimonchikamen/eulear-circles:latest .
+
       - name: push docker
         run: docker push dimonchikamen/eulear-circles:latest
