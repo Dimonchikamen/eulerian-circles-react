@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eulear-circles
+spec:
+  selector:
+    matchLabels:
+      app: eulear-circles
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: eulear-circles
+    spec:
+      containers:
+      - name: eulear-circles
+        image: dimonchikamen/eulear-circles:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eulear-circles
+spec:
+  type: NodePort
+  selector:
+    app: eulear-circles
+  ports:
+  - port: 80
+    targetPort: 80

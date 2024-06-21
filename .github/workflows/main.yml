@@ -30,3 +30,7 @@ jobs:
         run: npm run test
       - name: build
         run: npm run build
+      - name: push to dockerhub
+        run: docker login --username {{ secrets.DOCKER_HUB_LOGIN }} --password {{ secrets.DOCKER_HUB_PASS }}
+        run: docker build -t eulear-circles:latest ../
+        run: docker push eulear-circles:latest
