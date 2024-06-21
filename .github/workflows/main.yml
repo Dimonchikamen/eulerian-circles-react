@@ -31,6 +31,7 @@ jobs:
       - name: build
         run: npm run build
   docker:
+    environment: ci-ci-yandex
     runs-on: ubuntu-latest
     strategy:
       matrix:
