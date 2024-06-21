@@ -37,6 +37,7 @@ jobs:
         node-version: [17.x, 18.x]
     
     steps:
+      - uses: actions/checkout@v2
       - name: login
         run: docker login --username {{ secrets.DOCKER_HUB_LOGIN }} --password {{ secrets.DOCKER_HUB_PASS }}
       - name: build
