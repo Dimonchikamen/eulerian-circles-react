@@ -76,7 +76,7 @@ jobs:
       - name: login git
         run: git config --global user.email "65847130+Dimonchikamen@users.noreply.github.com"
       - name: login git 2
-        run: git config --global user.name "Dimonchikamen"
+        run: git config --global user.name "Dimonchikamn"
 
       - name: deploy to gh-pages
         run: npm run deploy
