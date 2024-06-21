@@ -8,6 +8,7 @@ on:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
+    environment: ci-ci-yandex
     strategy:
       matrix:
         node-version: [17.x, 18.x]
@@ -30,18 +31,9 @@ jobs:
         run: npm run test
       - name: build
         run: npm run build
-  docker:
-    environment: ci-ci-yandex
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [17.x, 18.x]
-    
-    steps:
-      - uses: actions/checkout@v2
-      - name: login
+      - name: login docker
         run: docker login --username ${{ secrets.DOCKER_HUB_LOGIN }} --password ${{ secrets.DOCKER_HUB_PASS }}
-      - name: build
-        run: docker build -t eulear-circles:latest ../
-      - name: push
+      - name: build docker
+        run: docker build -t eulear-circles:latest ../../
+      - name: push docker
         run: docker push eulear-circles:latest
