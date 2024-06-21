@@ -28,17 +28,18 @@ jobs:
       - name: stylelint
         run: npm run stylelint
 
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: tsc
         run: npm run tsc
 
       - name: tests
         run: npm run test
 
-      - name: build
-        run: npm run build
-
   docker:
-    needs: lint
+    needs: tests
     runs-on: ubuntu-latest
     environment: ci-ci-yandex
   
@@ -52,3 +53,14 @@ jobs:
 
       - name: push docker
         run: docker push dimonchikamen/eulear-circles:latest
+
+  deploy:
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: build
+        run: npm run build
+      - name: deploy to gh-pages
+        run: npm run deploy
