@@ -2,9 +2,9 @@ name: main job
 run-name: ${{ github.actor }} runs main
 on:
   push:
-    branches: [main, ci-concurrently]
+    branches: [main]
   pull_request:
-    branches: [main, ci-concurrently]
+    branches: [main]
 jobs:
   pipeline:
     runs-on: ubuntu-latest
@@ -36,4 +36,4 @@ jobs:
       - name: build docker
         run: docker build -t eulear-circles:latest .
       - name: push docker
-        run: docker push eulear-circles:latest
+        run: docker push dimonchikamen/eulear-circles:latest
