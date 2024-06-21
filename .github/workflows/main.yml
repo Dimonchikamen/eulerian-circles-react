@@ -43,6 +43,7 @@ jobs:
     environment: ci-ci-yandex
   
     steps: 
+      - uses: actions/checkout@v3
       - name: login docker
         run: docker login --username ${{ secrets.DOCKER_HUB_LOGIN }} --password ${{ secrets.DOCKER_HUB_PASS }}
 
