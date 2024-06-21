@@ -66,12 +66,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: install modules
         run: npm ci
 
       - name: build
         run: npm run build
+
+      - name: login git
+        run: git config --global user.email "dominchik@yandex.ru"
+      - name: login git 2
+        run: git config --global user.name "Dimonchikamen"
 
       - name: deploy to gh-pages
         run: npm run deploy
