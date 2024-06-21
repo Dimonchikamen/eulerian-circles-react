@@ -34,6 +34,6 @@ jobs:
       - name: login docker
         run: docker login --username ${{ secrets.DOCKER_HUB_LOGIN }} --password ${{ secrets.DOCKER_HUB_PASS }}
       - name: build docker
-        run: docker build -t eulear-circles:latest ../../
+        run: docker build -t eulear-circles:latest .
       - name: push docker
         run: docker push eulear-circles:latest
