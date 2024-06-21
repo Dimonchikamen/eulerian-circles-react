@@ -31,9 +31,13 @@ jobs:
   tests:
     needs: lint
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
+
+      - name: install modules
+        run: npm ci
+        
       - name: tsc
         run: npm run tsc
 
