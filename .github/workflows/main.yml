@@ -74,7 +74,7 @@ jobs:
         run: npm run build
 
       - name: login git
-        run: git config --global user.email "dominchik@yandex.ru"
+        run: git config --global user.email "65847130+Dimonchikamen@users.noreply.github.com"
       - name: login git 2
         run: git config --global user.name "Dimonchikamen"
 
