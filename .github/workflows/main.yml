@@ -37,7 +37,7 @@ jobs:
 
       - name: install modules
         run: npm ci
-        
+
       - name: tsc
         run: npm run tsc
 
@@ -66,7 +66,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: install modules
+        run: npm ci
+
       - name: build
         run: npm run build
+
       - name: deploy to gh-pages
         run: npm run deploy
