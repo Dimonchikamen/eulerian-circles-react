@@ -30,7 +30,16 @@ jobs:
         run: npm run test
       - name: build
         run: npm run build
-      - name: push to dockerhub
+  docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [17.x, 18.x]
+    
+    steps:
+      - name: login
         run: docker login --username {{ secrets.DOCKER_HUB_LOGIN }} --password {{ secrets.DOCKER_HUB_PASS }}
+      - name: build
         run: docker build -t eulear-circles:latest ../
+      - name: push
         run: docker push eulear-circles:latest
